@@ -1,0 +1,55 @@
+README.md
+  s_b1d7ce37ee8ae8::t_fa7328f6436470 15
+docs/bibi-bookshelf/memoir/OEBPS/book.css
+  s_b1d7ce37ee8ae8::t_7f060f901d6284 12-19
+docs/bibi-bookshelf/memoir/OEBPS/chapter-0.xhtml
+  s_b1d7ce37ee8ae8::t_90963ba8f6fe20 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-1.xhtml
+  s_b1d7ce37ee8ae8::t_7a7a45cdc12531 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-10.xhtml
+  s_b1d7ce37ee8ae8::t_0b79fb2ac1286c 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-11.xhtml
+  s_b1d7ce37ee8ae8::t_80544650e25d35 2,5-8,10-11,13,15
+docs/bibi-bookshelf/memoir/OEBPS/chapter-2.xhtml
+  s_b1d7ce37ee8ae8::t_69cd0e029ee9cc 2-3
+docs/bibi-bookshelf/memoir/OEBPS/chapter-3.xhtml
+  s_b1d7ce37ee8ae8::t_4fc69c1ebc5dc9 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-4.xhtml
+  s_b1d7ce37ee8ae8::t_3394375f5b32b1 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-5.xhtml
+  s_b1d7ce37ee8ae8::t_65d88a72abff1d 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-6.xhtml
+  s_b1d7ce37ee8ae8::t_72ae679a1be3f1 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-7.xhtml
+  s_b1d7ce37ee8ae8::t_a6754b19d1dc1a 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-8.xhtml
+  s_b1d7ce37ee8ae8::t_e8d3488497d73d 2,22
+docs/bibi-bookshelf/memoir/OEBPS/chapter-9.xhtml
+  s_b1d7ce37ee8ae8::t_69b6eb1e63555a 2
+docs/bibi-bookshelf/memoir/OEBPS/nav.xhtml
+  s_b1d7ce37ee8ae8::t_0f0ecfd5e11020 2
+docs/bibi/extensions/memoir-loading.js
+  s_b1d7ce37ee8ae8::t_c0c79c22fac4f5 1-112
+docs/bibi/index.html
+  s_b1d7ce37ee8ae8::t_05819b7a1d7b06 15-26,36-37,43-49,65
+docs/bibi/presets/default.js
+  s_b1d7ce37ee8ae8::t_a50c66f92c4d54 98
+docs/index.html
+  s_b1d7ce37ee8ae8::t_42e27094dcde81 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "032547e722e98d8bcdd186de4260eb39bb588c22",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
