@@ -12,6 +12,7 @@
 - 上传前也要在本地运行 `python3 scripts/check_video_sizes.py docs`。云端检查在推送之后执行，不能代替上传前检查。
 - 当前仓库只负责网页展示与维护，不作为原始资料备份。不要放入原始采集、编辑说明、本机构建记录或凭据。
 - 使用 Bibi 1.2.0（MIT）及思源宋体本书用字子集（OFL，更名 Memoir Serif）；许可证与来源说明随网页资源保留。图片及视频保持原件字节，不自动压缩。
+- 正文先打开；照片按阅读位置请求原图，显示已下载字节与百分比，失败或30秒无数据时可单独重试。视频使用 `preload="none"`，点击播放后加载。加载实现位于 `docs/bibi/extensions/memoir-loading.js`，正文图片通过 `data-memoir-src` 接入，不能直接恢复为普通 `src` 而重新阻塞首开。
 
 本地预览：`python3 -m http.server 8875 --bind 127.0.0.1 --directory docs`。
 

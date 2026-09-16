@@ -12,6 +12,18 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<title>姥姥的那些年</title>
+        <style>
+        #memoir-loading { position:fixed; inset:0; z-index:2147483647; background:#fffdf8; color:#594a38; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:28px; text-align:center; font:18px/1.7 sans-serif; }
+        #memoir-loading progress { width:min(280px,80vw); accent-color:#85633f; }
+        #memoir-loading button { font:inherit; padding:8px 22px; border:1px solid #85633f; border-radius:6px; background:#fffaf1; color:inherit; }
+        </style>
+        <script>
+        window.setTimeout(function () {
+            if (window.memoirOpened) return;
+            var panel = document.getElementById('memoir-loading');
+            if (panel) panel.querySelector('small').textContent = '连接较慢或加载遇到问题。可以稍候，或点下面重新打开。';
+        }, 25000);
+        </script>
 
 		<!-- # Bibi | EPUB Reader on your website. : © Satoru Matsushima - https://bibi.epub.link or https://github.com/satorumurmur/bibi / Licensed under the MIT License - https://github.com/satorumurmur/bibi/blob/master/LICENSE -->
 
@@ -21,13 +33,20 @@
 
 		<link id="bibi-style" rel="stylesheet" href="resources/styles/bibi.css" />
 		<link id="bibi-dress" rel="stylesheet" href="wardrobe/everyday/bibi.dress.css" />
-		<script id="bibi-script" src="resources/scripts/bibi.js"></script>
-		<script id="bibi-preset" src="presets/default.js" data-bibi-bookshelf=""></script>
+		<script id="bibi-script" src="resources/scripts/bibi.js" defer></script>
+		<script id="bibi-preset" src="presets/default.js?v=loading2" data-bibi-bookshelf="" defer></script>
 
 	</head>
 
 
 	<body data-bibi-book="memoir">
+        <div id="memoir-loading" role="status" aria-live="polite">
+            <strong>姥姥的那些年</strong>
+            <p>正在连接，准备正文…</p>
+            <progress max="12" value="0" aria-label="正文准备进度"></progress>
+            <small>正文先打开，照片按阅读位置加载。</small>
+            <button type="button" onclick="location.reload()">重新打开</button>
+        </div>
 
 		<div id="bibi-info">
 			<h1>This E-Book is Published on the Web with Bibi | EPUB Reader on your website.</h1>
