@@ -1,0 +1,71 @@
+README.md
+  s_b1d7ce37ee8ae8::t_7ccaf9c7eaee11 19-24
+docs/bibi-bookshelf/memoir/OEBPS/book.css
+  s_b1d7ce37ee8ae8::t_242863732692f4 16-20
+docs/bibi-bookshelf/memoir/OEBPS/chapter-0.xhtml
+  s_b1d7ce37ee8ae8::t_97e3dcc4b7c112 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-1.xhtml
+  s_b1d7ce37ee8ae8::t_38f5a8ad61e0da 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-10.xhtml
+  s_b1d7ce37ee8ae8::t_bea9de8956c3b2 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-11.xhtml
+  s_b1d7ce37ee8ae8::t_5aa1aa3f90f6bc 2,11
+docs/bibi-bookshelf/memoir/OEBPS/chapter-2.xhtml
+  s_b1d7ce37ee8ae8::t_508b5a7eaa8f9e 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-3.xhtml
+  s_b1d7ce37ee8ae8::t_f532c27ef74227 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-4.xhtml
+  s_b1d7ce37ee8ae8::t_1c0893b28798db 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-5.xhtml
+  s_b1d7ce37ee8ae8::t_c896aa23ced701 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-6.xhtml
+  s_b1d7ce37ee8ae8::t_8c57b217a12e2f 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-7.xhtml
+  s_b1d7ce37ee8ae8::t_04ad10b9d9470f 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-8.xhtml
+  s_b1d7ce37ee8ae8::t_1e9633fcceaf2b 2
+docs/bibi-bookshelf/memoir/OEBPS/chapter-9.xhtml
+  s_b1d7ce37ee8ae8::t_c4fb53cfbfc8a5 2
+docs/bibi-bookshelf/memoir/OEBPS/nav.xhtml
+  s_b1d7ce37ee8ae8::t_342f8f8e9d2374 2
+docs/bibi/extensions/memoir-loading.js
+  s_b1d7ce37ee8ae8::t_c55cee271fc19d 10-24,30,32-40,60-68,71-78,80-83,85-134,136-150,163-164,172
+docs/bibi/index.html
+  s_b1d7ce37ee8ae8::t_381b51c87ba014 36,38
+docs/bibi/memoir-cache.js
+  s_b1d7ce37ee8ae8::t_b5235f5d1bff56 1
+docs/bibi/presets/default.js
+  s_b1d7ce37ee8ae8::t_00e6175d5d7dc1 98
+docs/index.html
+  s_b1d7ce37ee8ae8::t_baf7e04818af61 1
+docs/licenses/cache/idb-keyval.txt
+  s_b1d7ce37ee8ae8::t_5e598aa6ac4afe 1-13
+docs/licenses/cache/workbox-core.txt
+  s_b1d7ce37ee8ae8::t_8a627c5bb60b6c 1-19
+docs/licenses/cache/workbox-precaching.txt
+  s_b1d7ce37ee8ae8::t_bc9489a3d61213 1-19
+docs/licenses/cache/workbox-range-requests.txt
+  s_b1d7ce37ee8ae8::t_4c397ed2e59140 1-19
+docs/licenses/cache/workbox-routing.txt
+  s_b1d7ce37ee8ae8::t_2b761171a0b006 1-19
+docs/licenses/cache/workbox-strategies.txt
+  s_b1d7ce37ee8ae8::t_b533213c052db9 1-19
+docs/sw.js
+  s_b1d7ce37ee8ae8::t_5166546907b1a6 1-2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "906c6d045dbcceff5ec0e496756c9f08604e3683",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
