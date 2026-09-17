@@ -1,4 +1,4 @@
-import {MediaStore} from './media-store.js';
+import {MediaStore, CHUNK_SIZE} from './media-store.js';
 import media from '../cache-media.json';
 const root = new URL('../', document.currentScript.src);
 const useWorker = document.currentScript.dataset.serviceWorker !== 'off' && !!window.ReadableStream;
@@ -19,6 +19,10 @@ async function download(url, progress, signal) {
     if (!store) throw new Error('CACHE_UNAVAILABLE');
     const state = await store.status(item);
     progress({...state, loaded: 0, source: state.complete ? 'local' : state.saved ? 'resume' : 'network'});
+    if (state.complete) {
+        try { return {blob:await store.blob(item),saved:true,available:state.available}; }
+        catch (error) { if (error.message!=='CACHE_MISS') throw error; /* Evicted since status: continue online. */ }
+    }
     // Cross-origin media uses the explicit IndexedDB path; our worker cannot
     // intercept that origin and would otherwise report an uncached download.
     if (useWorker && navigator.serviceWorker?.controller && new URL(url, location.href).origin === root.origin) {
@@ -32,8 +36,18 @@ async function download(url, progress, signal) {
             progress({...state, loaded, source: state.complete ? 'local' : state.saved ? 'resume' : 'network'});
         }
         if (loaded !== item.bytes) throw new Error('INCOMPLETE_FILE');
+        const blob = new Blob(parts, {type:item.type});
+        // An older controlling worker may not know the new hashed media URL.
+        // Persist these already-downloaded bytes, with the same chunk hash gate,
+        // instead of downloading them a second time after the worker updates.
+        if (!response.headers.has('X-Memoir-Cache')) {
+            for (let i=0; i<item.chunks.length; i++) {
+                if (signal?.aborted) throw new DOMException('Paused','AbortError');
+                await store.save(item,i,await blob.slice(i*CHUNK_SIZE,(i+1)*CHUNK_SIZE).arrayBuffer());
+            }
+        }
         const current = await store.status(item);
-        return {blob: new Blob(parts, {type: item.type}), saved: current.complete, available: current.available};
+        return {blob, saved: current.complete, available: current.available};
     }
     const source = new URL(url, location.href); source.searchParams.set('v', item.sha256);
     source.searchParams.set('memoir-chunk', '1');
