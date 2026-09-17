@@ -1,0 +1,40 @@
+scripts/prepare-media.mjs
+  s_b1d7ce37ee8ae8::t_8a4c339b517604 15,64
+  s_b1d7ce37ee8ae8::t_14d1b626e21338 31-33,87-93,100
+  s_b1d7ce37ee8ae8::t_2841201747c6f1 105,114
+  s_b1d7ce37ee8ae8::t_cc66bef292a4de 1-14,16-30,34-63,65-86,94-99,101-104,106-113,115-122
+scripts/build-cloudflare.mjs
+  s_b1d7ce37ee8ae8::t_da94a417e78caa 10-11,20,26-34,38-49,89,94
+  s_b1d7ce37ee8ae8::t_29584b1fe75f9e 62
+tests/prepare-media.test.mjs
+  s_b1d7ce37ee8ae8::t_14100548daf33d 1-80
+scripts/media-links.mjs
+  s_b1d7ce37ee8ae8::t_da94a417e78caa 1-14
+package.json
+  s_b1d7ce37ee8ae8::t_7ddb3abf28530a 6,19-22
+media-policy.json
+  s_b1d7ce37ee8ae8::t_cc66bef292a4de 1-3,5
+  s_b1d7ce37ee8ae8::t_14d1b626e21338 4
+README.md
+  s_b1d7ce37ee8ae8::t_fafe66f39f2bae 19-20,23,29-43,51,56
+package-lock.json
+  s_b1d7ce37ee8ae8::t_aba50b56940426 16-46,491-1105,1158-1205,1212-1372
+web-media/manifest.json
+  s_b1d7ce37ee8ae8::t_4579ed2c0ee895 1-136
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5973d91a6a338eb316fcc3dadf59760a18d3a7dc",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
