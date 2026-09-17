@@ -16,4 +16,10 @@
 
 本地预览：`python3 -m http.server 8875 --bind 127.0.0.1 --directory docs`。
 
+媒体缓存：图片按可见位置自动保存，视频提供“保存视频到本机／暂停／继续”按钮。使用 idb-keyval 6.3.0 将 SHA256 校验后的 256 KiB 分片写入 IndexedDB；中断后复用完整分片，同一文件更新正文时不必重新下载。保存失败会提示，不能将当次能播放当作已保存。
+
+Workbox 7.4.1 额外缓存正文与阅读器，并处理视频 Range 播放。媒体保存不依赖 Service Worker；微信等不支持时仍尝试 IndexedDB 兼容路径。库已打包进网站，不请求第三方 CDN，许可证位于 `docs/licenses/cache/`。本机缓存可能被微信、系统清理或因空间不足而无法保存，不能保证永久离线；未做微信／鸿蒙真机验收。
+
+维护注意：`docs/bibi/memoir-cache.js` 和 `docs/sw.js` 是构建产物，包含媒体分片哈希与网页修订信息。替换正文或媒体时必须从本机构建源执行 `build_book.py`（包含缓存构建），不可只替换静态文件。新版缓存等待用户点击“有新版，点击更新”后切换。不要把本机构建记录和资料库上传。
+
 部署采用 [GitHub 官方 Pages 工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。国内各网络及微信中的访问效果需真机确认，不能保证始终可用。

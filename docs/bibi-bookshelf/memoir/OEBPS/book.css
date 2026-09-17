@@ -13,6 +13,11 @@ img, video { display: block; width: auto; height: auto; max-width: 100%; max-hei
 .memoir-photo[data-ready="yes"] { opacity: 1; }
 .memoir-media { position: relative; height: 44vh; width: 100%; background: #f4efe6; break-inside: avoid; }
 .memoir-media .memoir-photo { margin: 0; }
+.memoir-cache-note { min-height:1.5em; font:12px/1.5 sans-serif; color:#756653; }
+.memoir-video-cache { min-height:100px; font:14px/1.5 sans-serif; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.memoir-video-cache span { flex-basis:100%; }
+.memoir-video-cache button { font:inherit; padding:8px 14px; background:#fffaf1; border:1px solid #85633f; border-radius:5px; }
+.memoir-video-cache progress { width:120px; }
 .memoir-media-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px; text-align: center; font: 15px/1.6 sans-serif; color: #665744; }
 .memoir-media-status progress { width: 80%; max-width: 240px; accent-color: #85633f; }
 .memoir-media-status button { font: inherit; padding: 8px 20px; border: 1px solid #85633f; border-radius: 6px; color: #59442c; background: #fffaf1; cursor: pointer; }

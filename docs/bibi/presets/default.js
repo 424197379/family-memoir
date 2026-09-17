@@ -95,7 +95,7 @@ Bibi.preset({
 // "src" is relative path from this preset file to the JavaScript file of the extension.
 // "id" must be defined in each extension file.
 "extensions": [
-    { "src": "../extensions/memoir-loading.js?v=loading2" },
+    { "src": "../extensions/memoir-loading.js?v=cache1" },
     // { "src": "../extensions/FOLDER-NAME-IF-EXISTS/FILE-NAME.js" }, // <THIS LINE IS AN EXAMPLE>
 ""],
 
