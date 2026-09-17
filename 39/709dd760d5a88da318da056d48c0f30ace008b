@@ -1,0 +1,31 @@
+scripts/build-cloudflare.mjs
+  s_b1d7ce37ee8ae8::t_cae5ea9fbcd782 9,60-61,93
+scripts/cache/client.js
+  s_b1d7ce37ee8ae8::t_a63a3522c19a51 55
+docs/bibi/extensions/memoir-loading.js
+  s_b1d7ce37ee8ae8::t_a63a3522c19a51 150-165
+README.md
+  s_b1d7ce37ee8ae8::t_82cbb9ba6b7e47 15-16
+scripts/pack-reader.mjs
+  s_b1d7ce37ee8ae8::t_cae5ea9fbcd782 37,44,78
+  s_b1d7ce37ee8ae8::t_a63a3522c19a51 72-73
+  s_b1d7ce37ee8ae8::t_bca683f057e062 28,95
+  s_b1d7ce37ee8ae8::t_a290d78a1212b0 87-90
+  s_b1d7ce37ee8ae8::t_a0882c456e12ce 1-27,29-36,38-43,45-71,74-77,79-86,91-94,96-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "39709dd760d5a88da318da056d48c0f30ace008b",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
