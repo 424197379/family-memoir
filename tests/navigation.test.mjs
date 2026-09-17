@@ -26,6 +26,14 @@ test('storage failure does not prevent online reading', async () => {
     const result = await freshPage('url',{fetcher:async () => new Response('new'),cached:async () => undefined,save:async () => {throw Error('quota');}});
     assert.equal(await result.text(),'new');
 });
+test('a stalled HTML body falls back without replacing the saved page', async () => {
+    const fetcher = async (_, {signal}) => new Response(new ReadableStream({start(controller) {
+        controller.enqueue(new TextEncoder().encode('<html>partial'));
+        signal.addEventListener('abort',()=>controller.error(Error('body timeout')));
+    }}));
+    const result = await freshPage('url',{fetcher,timeout:10,cached:async () => new Response('complete saved page'),save:async () => assert.fail('partial page must not be saved')});
+    assert.equal(await result.text(),'complete saved page');
+});
 test('current reader acknowledges update; legacy stalled reader does not', async () => {
     const current = {postMessage(message,ports) {assert.equal(message.type,'MEMOIR_READER_PROBE'); ports[0].postMessage({type:'MEMOIR_READER_READY'}); ports[0].close();}};
     assert.equal(await readerAcknowledges(current,{timeout:100}),true);

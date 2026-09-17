@@ -5,6 +5,10 @@ export async function freshPage(request, {fetcher = fetch, cached, save, timeout
     try {
         const response = await fetcher(request, {cache:'no-cache', signal:controller.signal});
         if (!response.ok) throw new Error('HTTP_'+response.status);
+        // Headers alone are not a usable page. A truncated/stalled HTML body
+        // must fall back too, rather than replacing the last readable copy.
+        await response.clone().arrayBuffer();
+        clearTimeout(timer);
         // Storage failure must not discard a successfully retrieved page.
         try { await save(response.clone()); } catch (_) { /* Online reading still works. */ }
         return response;
