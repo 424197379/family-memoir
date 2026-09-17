@@ -8,16 +8,26 @@ Bibi.x({id: 'MemoirLoading', description: 'Visible photo loading and truthful pr
     const progress = notice.querySelector('progress');
     const size = bytes => (bytes / 1048576).toFixed(1) + ' MB';
     const styles = new Map();
+    async function boundedFetch(url, timeout) {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), timeout);
+        try {
+            const response = await fetch(url, {signal: controller.signal});
+            if (!response.ok) throw new Error('RESOURCE_UNAVAILABLE');
+            return await response.blob();
+        } finally { clearTimeout(timer); }
+    }
     function localStyle(url) {
         if (!styles.has(url)) styles.set(url, (async () => {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('STYLE_UNAVAILABLE');
-            let css = await response.text();
+            let css;
+            try { css = await (await boundedFetch(url, 4000)).text(); }
+            catch (_) { return 'body{font-family:serif;line-height:1.8} img,video{max-width:100%;max-height:44vh} .memoir-media{height:44vh;position:relative} .memoir-media-status[hidden]{display:none}'; }
             const fontURL = new URL('fonts/memoir-serif.woff2', url);
-            const font = await fetch(fontURL);
-            if (!font.ok) throw new Error('FONT_UNAVAILABLE');
-            const blob = URL.createObjectURL(await font.blob());
-            css = css.replace('fonts/memoir-serif.woff2', blob);
+            try {
+                const blob = URL.createObjectURL(await boundedFetch(fontURL, 1500));
+                css = css.replace('fonts/memoir-serif.woff2', blob);
+            } catch (_) { css = css.replace(/@font-face\s*\{[^}]+\}/, ''); }
+            css = css.replace('font-display: block', 'font-display: swap');
             return css;
         })());
         return styles.get(url);
@@ -27,7 +37,7 @@ Bibi.x({id: 'MemoirLoading', description: 'Visible photo loading and truthful pr
     O.download = function (source) {
         if (B.ExtractionPolicy || source.URI || !/\.(xhtml|opf|xml)$/.test(source.Path)) return download(source);
         const path = (/^([a-z]+:\/\/|\/)/.test(source.Path) ? '' : B.Path + '/') + source.Path;
-        const url = new URL(path, location.href); url.searchParams.set('reader', 'cache1');
+        const url = new URL(path, location.href); url.searchParams.set('reader', 'wechat2');
         source.URI = url.href;
         return download(source).then(async result => {
             // Blob chapter frames may not be controlled by the worker. Fetch their
