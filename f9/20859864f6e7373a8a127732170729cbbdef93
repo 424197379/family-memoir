@@ -1,0 +1,29 @@
+.github/workflows/pages.yml
+  s_b1d7ce37ee8ae8::t_56db22800689bb 25-31,35
+scripts/cache/sw.js
+  s_b1d7ce37ee8ae8::t_56db22800689bb 14
+README.md
+  s_b1d7ce37ee8ae8::t_924b9a88e7f23e 3,5,7-11,13,15,17-20,22-27,29,31-37,39,41
+package.json
+  s_b1d7ce37ee8ae8::t_56db22800689bb 6
+.gitignore
+  s_b1d7ce37ee8ae8::t_56db22800689bb 8
+scripts/build-cloudflare.mjs
+  s_b1d7ce37ee8ae8::t_56db22800689bb 12-15,35-36,47-50,59,68,75-76,96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f920859864f6e7373a8a127732170729cbbdef93",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
