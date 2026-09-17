@@ -1,0 +1,21 @@
+docs/bibi/memoir-cache.js
+  s_b1d7ce37ee8ae8::t_2f63c2da3cb6b1 1
+docs/sw.js
+  s_b1d7ce37ee8ae8::t_b2a99bf2d65567 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "08de6ecf2b299d23d227d2813b8ed602e053a204",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
