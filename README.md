@@ -1,5 +1,17 @@
 # 家庭回忆录网站
 
+## Cloudflare 自动部署
+
+2026-09-17：按用户要求新增 Cloudflare Pages GitHub 联动配置，项目名 `grandma-memoir`，部署成功后使用其 `pages.dev` 免费网址。网站默认打开 Bibi 翻页阅读。下方正文直出为 GitHub 旧站历史行为，不能当作 Cloudflare 默认体验。
+
+- 连接本仓库 `main`，框架选择 None，构建命令 `npm run build:cloudflare`，输出目录 `cloudflare-dist`，Node.js 22。
+- 后续将**获准发布**的成品更新到 `docs/` 后推送，Cloudflare 自动重建；无需手工上传部署包。完整资料库和未获准的草稿不进入仓库。
+- 文字、字体和图片由 Cloudflare 提供；视频仍通过现有 GitHub Pages 地址播放，不消耗 Cloudflare Pages 单文件25 MiB限额。图片保持原文件，超过25 MiB会中止构建；视频超过50 MiB会中止构建，不自动压缩。
+- `scripts/build-cloudflare.mjs` 从 `docs/` 创建独立产物、外置视频链接、重建缓存清单；不会修改 `docs/`。缓存源码和回归测试随仓库保存。外链视频点击保存时使用浏览器 IndexedDB；跨站 Range 响应仍须通过长度和SHA256校验才标记保存。
+- 新视频在 GitHub Pages 部署成功后才可访问。两个平台构建完成时间可能不同，发布新视频后应核对 GitHub Pages 的工作流成功。
+- 本地验证：`npm ci && npm run build:cloudflare`；本地预览 `python3 -m http.server 8883 --bind 127.0.0.1 --directory cloudflare-dist`。
+- 国内和微信实际加载速度由网络决定；换域名后浏览器缓存独立，需要首次重新加载。部署成功不等于微信真机验收通过。
+
 《姥姥的那些年》网页试读版，使用 Bibi 阅读器，包含正文、九张照片及一段家庭视频。
 
 阅读地址：https://424197379.github.io/family-memoir/
