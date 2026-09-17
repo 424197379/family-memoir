@@ -11,7 +11,7 @@ const mediaByPath = new Map(manifest.media.map(media => [new URL(media.url, root
 const store = new MediaStore({name: `memoir-media-v1:${root.pathname}`, report: message => {
     self.clients.matchAll().then(clients => clients.forEach(client => client.postMessage(message)));
 }});
-const pages = new Set(['', 'index.html', 'bibi/', 'bibi/index.html'].map(p => new URL(p,root).pathname));
+const pages = new Set(['', 'index.html', 'read.html', 'bibi/', 'bibi/index.html'].map(p => new URL(p,root).pathname));
 // Register before the Workbox precache route: navigation must not be cache-first.
 registerRoute(({request,url}) => request.mode === 'navigate' && url.origin === root.origin && pages.has(url.pathname),
     async ({request,url}) => {

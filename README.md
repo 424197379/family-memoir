@@ -1,45 +1,41 @@
 # 家庭回忆录网站
 
-## Cloudflare 自动部署
+《姥姥的那些年》网页试读版，使用 Bibi 翻页阅读器，包含十二章正文、九张照片及一段家庭视频。
 
-2026-09-17自动更新：对外固定分享 `https://grandma-memoir.pages.dev/`，不再要求更换测试链接或点击更新。页面导航先向服务器重新验证，失败或6秒无响应时使用本版本已保存的网页；阅读中不刷新已识别的新版页面。Service Worker安装完成自动激活，未实现更新握手的历史页面会自动重开一次以迁移旧缓存。缓存客户端文件名带内容哈希，避免新正文搭配旧脚本。仅预存入口、合并阅读页及对应缓存客户端，媒体继续使用原有SHA256分片库；升级不清除媒体。无Service Worker的浏览器依靠HTTP重新验证。用户要求后续不自动发送飞书，除非再次明确提出。
+## 阅读与发布
 
-2026-09-17：按用户要求新增 Cloudflare Pages GitHub 联动配置，项目名 `grandma-memoir`，部署成功后使用其 `pages.dev` 免费网址。网站默认打开 Bibi 翻页阅读。下方正文直出为 GitHub 旧站历史行为，不能当作 Cloudflare 默认体验。
+- GitHub Pages：https://424197379.github.io/family-memoir/
+- Cloudflare Pages：https://grandma-memoir.pages.dev/
+- 两站默认均打开 Bibi 翻页版，保留目录、照片、音视频能力。根网址和历史 `read.html` 链接统一进入 `bibi/`，不再默认显示纵向纯文字版。
+- 分享使用固定网址；后续不自动发送飞书，除非用户再次明确要求。
+- 当前授权正文源稿 SHA256：`8b41fe54039bab834b56bca4f6fc8e4995effbee34710d5f69957c57cb1a6933`。后续素材和修订不自动发布，完整资料库、原始采集、编辑说明、本机构建记录和凭据不进入仓库。
 
-- 连接本仓库 `main`，框架选择 None，构建命令 `npm run build:cloudflare`，输出目录 `cloudflare-dist`，Node.js 22。
-- 后续将**获准发布**的成品更新到 `docs/` 后推送，Cloudflare 自动重建；无需手工上传部署包。完整资料库和未获准的草稿不进入仓库。
-- 文字、字体和图片由 Cloudflare 提供；视频仍通过现有 GitHub Pages 地址播放，不消耗 Cloudflare Pages 单文件25 MiB限额。图片保持原文件，超过25 MiB会中止构建；视频超过50 MiB会中止构建，不自动压缩。
-- `scripts/build-cloudflare.mjs` 从 `docs/` 创建独立产物、外置视频链接、重建缓存清单；不会修改 `docs/`。缓存源码和回归测试随仓库保存。外链视频点击保存时使用浏览器 IndexedDB；跨站 Range 响应仍须通过长度和SHA256校验才标记保存。
-- 新视频在 GitHub Pages 部署成功后才可访问。两个平台构建完成时间可能不同，发布新视频后应核对 GitHub Pages 的工作流成功。
-- 本地验证：`npm ci && npm run build:cloudflare`；本地预览 `python3 -m http.server 8883 --bind 127.0.0.1 --directory cloudflare-dist`。
-- 国内和微信实际加载速度由网络决定；换域名后浏览器缓存独立，需要首次重新加载。部署成功不等于微信真机验收通过。
+## 共用构建
 
-2026-09-17首屏修复：用户在Cloudflare站仍停于“正在连接，准备正文”。`scripts/pack-reader.mjs` 将Bibi核心、配置、HTML净化扩展、加载扩展、兼容补丁、正文包目录与12章、样式和思源宋体子集合并到首个HTML响应，保留分页和目录。图片、视频和可选缓存脚本不参与首屏依赖；不改变公开正文和媒体字节。扩展语法降到ES2017，增加启动失败提示与30秒超时。新建本地端口、仅允许HTML返回200且其他同站请求全部503时，390×844视口封面和正文翻页通过；这不替代真实微信验收。视频保存控件会在异步缓存脚本稍后就绪时恢复。
+`docs/` 是已获准发布的输入，两个平台都经 `scripts/build-cloudflare.mjs` 构建独立产物，不再直接部署旧目录。
 
-《姥姥的那些年》网页试读版，使用 Bibi 阅读器，包含正文、九张照片及一段家庭视频。
+| 平台 | 命令 | 输出目录 | 视频来源 |
+| --- | --- | --- | --- |
+| GitHub Pages | `npm run build:github` | `github-dist` | 本站原视频，路径保持不变 |
+| Cloudflare Pages | `npm run build:cloudflare` | `cloudflare-dist` | 原 GitHub Pages 视频地址 |
 
-阅读地址：https://424197379.github.io/family-memoir/
+- Node.js 22，先运行 `npm ci`。GitHub Actions 与 Cloudflare GitHub 集成都监听 `main`；推送获准成品后自动构建部署。Cloudflare 项目名 `grandma-memoir`，框架 None。
+- 两个构建均执行15项缓存/导航测试，并校验章节与媒体字节。构建不压缩照片或视频，不改写正文；Cloudflare仅将视频URL改为GitHub地址。
+- 上传前运行 `python3 scripts/check_video_sizes.py docs`。每个视频上限50 MiB（52,428,800字节），超过即中止；GitHub Actions和构建也检查。Cloudflare输出另受单文件25 MiB限制，因此视频不打入Cloudflare产物。
+- 新视频需要等GitHub Pages部署成功；两个平台完成时间可能不同。
+- 本地预览GitHub：`python3 -m http.server 8886 --bind 127.0.0.1 --directory github-dist`；Cloudflare替换为 `cloudflare-dist`。排查GitHub子路径问题时另以 `/family-memoir/` 前缀预览。
+- 更新获准正文/媒体时，先由本地书稿构建生成输入，再执行这里的托管构建。`docs/`内的旧缓存bundle会被托管构建覆盖；维护缓存请修改 `scripts/cache/`，维护合并首屏请修改 `scripts/pack-reader.mjs`。
 
-默认直接阅读：https://424197379.github.io/family-memoir/read.html?v=wechat2 。正文和基本样式内嵌在约30KB的HTML中；即使缓存脚本、字体和媒体失败也能阅读文字。向下滚动，顶部可选翻页版。普通浏览器和微信进入Bibi时默认转到简洁版，显式 `flip=1` 可保留翻页模式。图片及视频的缓存作为可选增强；首屏不等待缓存初始化。根网址直接返回正文HTML，不再跳转加载框架；显式进入翻页版时，缓存预加载推迟到正文打开之后。
+## 首屏、媒体与自动更新
 
-2026-09-17用户微信实测旧版停在“正在连接，准备正文”，旧版微信首屏验收失败。新入口已完成桌面手机尺寸及依赖失败注入测试，真实微信复测仍待确认，不把模拟视口称作微信真机通过。
+- Bibi核心、配置、扩展、兼容补丁、15份书籍结构/章节文件、正文样式与思源宋体子集合并到首个阅读HTML。图片、视频及可选缓存脚本不阻塞首屏；出错或超时显示明确提示。
+- 照片按阅读位置请求，显示下载进度，失败或30秒无数据时可重试。视频 `preload="none"`，点击播放才加载；不预先下载全书媒体。
+- idb-keyval 6.3.0将SHA256校验后的256 KiB分片保存到IndexedDB，提供中断续传及视频保存/暂停/继续。文件内容不变时复用缓存。服务器若忽略Range而返回全文件，只能完整接收校验，不能保证按字节续传。跨站视频保存不借同源SW分支虚报成功。
+- Workbox 7.4.1预存入口、合并阅读页和哈希缓存客户端，共3项，并处理视频Range播放。页面导航先联网重新验证，失败或6秒超时回退完整已缓存网页；不以半截响应覆盖旧页面。
+- Service Worker安装完成自动激活；历史无握手页面自动重开同一网址一次，新版阅读页不被强制打断。页面缓存分版本，升级不删除媒体分片；无需更换链接或点击更新按钮。GitHub的HTTP缓存头由平台控制，不能通过Cloudflare `_headers` 配置改变；无SW浏览器依靠平台HTTP缓存策略。
+- 浏览器/微信可能清理本地缓存或限制SW、IndexedDB，不能保证永久离线。首次HTML和未缓存媒体仍取决于网络；部署成功不代表国内或微信真机验收成功。原HEVC/HDR视频跨设备播放仍需验证。
+- 使用Bibi 1.2.0（MIT）、思源宋体子集（OFL，更名Memoir Serif），缓存库随站打包，无第三方CDN脚本依赖，许可证随资源保留。
 
-2026-09-17 按用户认可版本发布。正文源稿 SHA256：`8b41fe54039bab834b56bca4f6fc8e4995effbee34710d5f69957c57cb1a6933`。本次授权仅覆盖该版读者正文和既有十项媒体；后续素材及修订不自动发布。
+## 验证边界
 
-- 网页文件放在 `docs/`；GitHub Pages 仅部署这个目录。
-- `main` 更新后，GitHub Actions 检查视频大小并发布网站。
-- 每个视频上限为 50 MiB（52,428,800 字节）；超过即停止部署，不自动压缩。
-- 上传前也要在本地运行 `python3 scripts/check_video_sizes.py docs`。云端检查在推送之后执行，不能代替上传前检查。
-- 当前仓库只负责网页展示与维护，不作为原始资料备份。不要放入原始采集、编辑说明、本机构建记录或凭据。
-- 使用 Bibi 1.2.0（MIT）及思源宋体本书用字子集（OFL，更名 Memoir Serif）；许可证与来源说明随网页资源保留。图片及视频保持原件字节，不自动压缩。
-- 正文先打开；照片按阅读位置请求原图，显示已下载字节与百分比，失败或30秒无数据时可单独重试。视频使用 `preload="none"`，点击播放后加载。加载实现位于 `docs/bibi/extensions/memoir-loading.js`，正文图片通过 `data-memoir-src` 接入，不能直接恢复为普通 `src` 而重新阻塞首开。
-
-本地预览：`python3 -m http.server 8875 --bind 127.0.0.1 --directory docs`。
-
-媒体缓存：图片按可见位置自动保存，视频提供“保存视频到本机／暂停／继续”按钮。使用 idb-keyval 6.3.0 将 SHA256 校验后的 256 KiB 分片写入 IndexedDB；中断后复用完整分片，同一文件更新正文时不必重新下载。保存失败会提示，不能将当次能播放当作已保存。
-
-Workbox 7.4.1 额外缓存正文与阅读器，并处理视频 Range 播放。媒体保存不依赖 Service Worker；微信等不支持时仍尝试 IndexedDB 兼容路径。库已打包进网站，不请求第三方 CDN，许可证位于 `docs/licenses/cache/`。本机缓存可能被微信、系统清理或因空间不足而无法保存，不能保证永久离线；未做微信／鸿蒙真机验收。
-
-维护注意：`docs/bibi/memoir-cache.js` 和 `docs/sw.js` 是构建产物，包含媒体分片哈希与网页修订信息。替换正文或媒体时必须从本机构建源执行 `build_book.py`（包含缓存构建），不可只替换静态文件。新版缓存等待用户点击“有新版，点击更新”后切换。不要把本机构建记录和资料库上传。
-
-部署采用 [GitHub 官方 Pages 工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。国内各网络及微信中的访问效果需真机确认，不能保证始终可用。
+2026-09-17已通过缓存/断点续传/自动更新的15项回归及双平台构建字节校验。此前已在Chrome手机尺寸、外部依赖失败、旧缓存迁移和离线回退场景验证翻页首屏；微信/鸿蒙真机、国内不同线路、全媒体连续播放须另外验证。用户已反馈Cloudflare国内连接困难，不将桌面环境的成功当作已解决该问题。
