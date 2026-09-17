@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "image": {"longEdge": 2048, "largeImagePixels": 24000000, "largeLongEdge": 3200, "quality": 86},
+  "video": {"longEdge": 1920, "shortEdge": 1080, "maxFps": 30, "crf": 23, "preset": "medium", "toneMap": "hable", "audioKbps": 128, "maxBytes": 52428800}
+}
