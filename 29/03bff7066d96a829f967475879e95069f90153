@@ -1,0 +1,38 @@
+package.json
+  s_b1d7ce37ee8ae8::t_ce7156bb9cc90c 1,3-18
+  s_b1d7ce37ee8ae8::t_be10225c5923cd 2
+README.md
+  s_b1d7ce37ee8ae8::t_be10225c5923cd 5
+  s_b1d7ce37ee8ae8::t_356cc3661fd1f0 3-4,6-14
+.gitignore
+  s_b1d7ce37ee8ae8::t_ce7156bb9cc90c 6-7
+scripts/build-cloudflare.mjs
+  s_b1d7ce37ee8ae8::t_be10225c5923cd 8,75-89
+  s_b1d7ce37ee8ae8::t_356cc3661fd1f0 1-7,9-74,90-91
+package-lock.json
+  s_b1d7ce37ee8ae8::t_dac996574f6c97 1-563
+scripts/cache/client.js
+  s_b1d7ce37ee8ae8::t_e02d49a9f4f2cf 1-81
+scripts/cache/media-store.js
+  s_b1d7ce37ee8ae8::t_4806aca1785b26 1-122
+scripts/cache/sw.js
+  s_b1d7ce37ee8ae8::t_2defd36ccbf151 1-45
+tests/media-store.test.mjs
+  s_b1d7ce37ee8ae8::t_7b2b068491517b 1-113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2903bff7066d96a829f967475879e95069f90153",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
