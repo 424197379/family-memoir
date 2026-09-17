@@ -1,0 +1,37 @@
+README.md
+  s_b1d7ce37ee8ae8::t_c4732708dee787 7
+docs/bibi/extensions/memoir-loading.js
+  s_2b2ee23175e063::t_0fccc3269e993b 191
+docs/bibi/index.html
+  s_2b2ee23175e063::t_cd05534b54ec7e 16-17
+docs/bibi/memoir-cache.js
+  s_2b2ee23175e063::t_bd01ff51f1c93d 1
+docs/index.html
+  s_2b2ee23175e063::t_6856cc3bd33a5b 1-232
+docs/sw.js
+  s_2b2ee23175e063::t_7913711296c649 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "ed77b848fed54b7184e612a427ebb73049419d58",
+  "prompts": {},
+  "sessions": {
+    "s_2b2ee23175e063": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ad43-1a1c-7f92-a58d-1bcd104af60d",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    },
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
