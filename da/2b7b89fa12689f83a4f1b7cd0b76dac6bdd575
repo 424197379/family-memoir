@@ -1,0 +1,31 @@
+README.md
+  s_b1d7ce37ee8ae8::t_b86b52051da4e1 7-10
+docs/bibi/extensions/memoir-loading.js
+  s_b1d7ce37ee8ae8::t_31f8a5d5a504c0 11-19,22-24,26-30,40
+docs/bibi/index.html
+  s_b1d7ce37ee8ae8::t_239fd96828f478 15-18,40,42,54
+docs/bibi/presets/default.js
+  s_b1d7ce37ee8ae8::t_ee892e022d63af 98
+docs/index.html
+  s_b1d7ce37ee8ae8::t_e8ccc25ae00ce6 1
+docs/read.html
+  s_b1d7ce37ee8ae8::t_60289ad44c7fa9 1-232
+docs/sw.js
+  s_b1d7ce37ee8ae8::t_e9c6db972c0674 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "da2b7b89fa12689f83a4f1b7cd0b76dac6bdd575",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
