@@ -1,1 +1,232 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=bibi/?v=wechat2"><title>姥姥的那些年</title><a href="bibi/?v=wechat2">打开回忆录</a></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>姥姥的那些年</title><style>@font-face { font-family: "Memoir Serif"; src: url("bibi-bookshelf/memoir/OEBPS/fonts/memoir-serif.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+html { background: #fffdf8; color: #302b25; }
+body { font-family: "Memoir Serif", "Songti SC", serif; font-size: 1.125rem; line-height: 1.9; padding: .6em; }
+h1 { font-size: 1.65em; line-height: 1.5; margin: .5em 0 1em; break-after: avoid; }
+h2 { font-size: 1.22em; line-height: 1.5; margin: 1.5em 0 .6em; break-after: avoid; }
+h2 + p { break-after: avoid; }
+p { margin: 0 0 1em; orphans: 2; widows: 2; }
+em { font-style: normal; font-size: .85em; color: #6e6256; }
+a { color: #795136; text-underline-offset: .2em; }
+figure { margin: 1em 0; break-inside: avoid; }
+img, video { display: block; width: auto; height: auto; max-width: 100%; max-height: 44vh; object-fit: contain; margin: 0 auto; }
+.memoir-photo { width: 100%; height: 44vh; opacity: 0; }
+.memoir-photo[data-ready="yes"] { opacity: 1; }
+.memoir-media { position: relative; height: 44vh; width: 100%; background: #f4efe6; break-inside: avoid; }
+.memoir-media .memoir-photo { margin: 0; }
+.memoir-cache-note { min-height:1.5em; font:12px/1.5 sans-serif; color:#756653; }
+.memoir-video-cache { min-height:100px; font:14px/1.5 sans-serif; display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.memoir-video-cache span { flex-basis:100%; }
+.memoir-video-cache button { font:inherit; padding:8px 14px; background:#fffaf1; border:1px solid #85633f; border-radius:5px; }
+.memoir-video-cache progress { width:120px; }
+.memoir-media-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px; text-align: center; font: 15px/1.6 sans-serif; color: #665744; }
+.memoir-media-status progress { width: 80%; max-width: 240px; accent-color: #85633f; }
+.memoir-media-status button { font: inherit; padding: 8px 20px; border: 1px solid #85633f; border-radius: 6px; color: #59442c; background: #fffaf1; cursor: pointer; }
+.memoir-media-status[hidden] { display: none; }
+video { width: 100%; background: #171717; }
+figcaption { font-size: .8em; line-height: 1.75; margin: .7em 0 0; color: #655c53; }
+.cover { padding-top: 22vh; }
+.cover h1 { font-size: 2.5em; letter-spacing: .08em; }
+.cover p { color: #7b6d5e; }
+.new-page { break-before: page; }
+.family-tree { break-inside: avoid; font-size: .74em; line-height: 1.4; padding: 0 .25em; }
+.person { display: flex; align-items: center; gap: .35em; border: 1px solid #caba9f; border-radius: 6px; background: #f5efe5; padding: .35em; }
+.person small, .person strong { display: block; }
+.person small { font-size: .8em; color: #75634e; }
+.person strong { font-weight: 400; }
+.avatar { width: 24px; height: 24px; flex: 0 0 24px; }
+.ancestors { display: flex; justify-content: center; gap: 1em; position: relative; padding-bottom: 1em; break-inside: avoid; }
+.ancestors::after { content: ''; position: absolute; left: .35em; right: 50%; bottom: 0; height: .6em; border-top: 1px solid #bca88d; border-left: 1px solid #bca88d; border-right: 1px solid #bca88d; }
+.branches { border-left: 1px solid #bca88d; margin-left: .35em; padding-left: .85em; }
+.branch { display: flex; align-items: center; position: relative; margin: 0 0 .7em; gap: 1.2em; break-inside: avoid; }
+.branch::before { content: ''; position: absolute; left: -.85em; width: .85em; top: 50%; border-top: 1px solid #bca88d; }
+.parent { flex: 0 0 44%; position: relative; }
+.parent::after { content: ''; position: absolute; right: -1.2em; width: 1.2em; top: 50%; border-top: 1px solid #bca88d; }
+.children { flex: 1; min-width: 0; border-left: 1px solid #bca88d; padding-left: .7em; }
+.child { position: relative; margin: .25em 0; }
+.child::before { content: ''; position: absolute; left: -.7em; width: .7em; top: 50%; border-top: 1px solid #bca88d; }
+@media (max-width: 480px) { body { padding: .25em; } .cover h1 { font-size: 2em; } }
+
+html { background:#fffdf8; color:#302b25; scroll-behavior:auto; }
+body { max-width:720px; margin:auto; padding:24px 22px 80px; font-size:19px; line-height:1.95; }
+section { margin:0 0 64px; padding-top:20px; }
+.cover { padding-top:24px; } .cover h1 { font-size:2em; }
+h1 { font-size:1.6em; line-height:1.5; } h2 { font-size:1.2em; }
+figure { margin:30px 0; } img,video { max-height:65vh; width:auto; max-width:100%; }
+img.memoir-photo { opacity:1; min-height:0; } img.memoir-photo:not([src]) { display:none; }
+video { width:100%; height:auto; aspect-ratio:16/9; }
+.media-note,.reader-nav { font:14px/1.6 sans-serif; color:#766650; }
+.media-note button { font:inherit; padding:8px 12px; margin:6px 8px 6px 0; background:#fff8eb; border:1px solid #bba98f; border-radius:6px; }
+.media-note progress { max-width:100%; width:220px; }
+a { color:#775631; } .reader-nav { display:flex; justify-content:space-between; gap:20px; padding-bottom:16px; border-bottom:1px solid #e2d9ca; }
+.family-tree { font-size:14px; }
+@media(max-width:480px) { body { padding:20px 18px 64px; } .cover h1 { font-size:1.8em; } }
+</style></head><body><nav class="reader-nav"><a href="#chapter-3">目录</a><a href="bibi/?v=wechat2&amp;flip=1">翻页阅读</a></nav><main><section id="chapter-0"><div class="cover"><h1>姥姥的那些年</h1>
+<p>家人的讲述与影像 · 第一版试读</p></div></section><section id="chapter-1"><h1>写在前面</h1>
+<p>我是付博，姥姥的外孙。我想把她的往事写下来，留给家里人，也留给以后的孩子们。</p>
+<p>说起姥姥，我最熟悉的是小时候去她家过暑假的日子。院子里的压水井，她烙的油烙饼，到现在还记得。可她年轻时过着怎样的生活，怎样把五个孩子养大，我知道得很少。妈妈和舅舅们记得的，又是我没有经历过的那些年。</p>
+<p>有些事，现在还能听姥姥亲口讲；有些事，要听家里人慢慢回忆。我想趁着大家还记得，把它们留下来。日子久了，许多事会忘，写下来，以后就还有地方可以翻看。</p>
+<p>这本书从姥姥的早年写起，一直写到今天，也放进家里的照片和声音。希望后来的孩子们读到这里，能多认识一点自己的长辈，知道他们是怎样过日子的。</p></section><section id="chapter-2"><h1>我们这一家</h1>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-03.jpg" data-memoir-bytes="16722253" alt="家族合照" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-03.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>2025年1月30日，家族合照，摄于新丰七队姥姥家。</figcaption></figure>
+<h2 class="new-page" id="chapter-2-story-0">三代亲属关系</h2>
+<p>姥姥姓冯，姥爷姓王。他们有四个儿子和一个女儿，女儿排行第五。</p>
+<div class="family-tree"><div class="ancestors"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="女"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 14V10a5 5 0 0 1 10 0v4l-2-2V10H9v2z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>姥姥</small><strong>姓冯</strong></div></div><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>姥爷</small><strong>姓王</strong></div></div></div><div class="branches"><div class="branch"><div class="parent"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>长子</small><strong>王根喜</strong></div></div></div><div class="children"><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="女"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 14V10a5 5 0 0 1 10 0v4l-2-2V10H9v2z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>女儿</small><strong>王敏 · 大姐姐</strong></div></div></div><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>儿子</small><strong>大哥哥</strong></div></div></div></div></div><div class="branch"><div class="parent"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>次子</small><strong>王光荣</strong></div></div></div><div class="children"><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>长子</small><strong>王强 · 二哥哥</strong></div></div></div><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>次子</small><strong>王智 · 三哥哥</strong></div></div></div></div></div><div class="branch"><div class="parent"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>三子</small><strong>王光明</strong></div></div></div><div class="children"><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="女"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 14V10a5 5 0 0 1 10 0v4l-2-2V10H9v2z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>女儿</small><strong>王婷</strong></div></div></div><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>儿子</small><strong>王志愿</strong></div></div></div></div></div><div class="branch"><div class="parent"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>四子</small><strong>王宾</strong></div></div></div><div class="children"><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="女"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 14V10a5 5 0 0 1 10 0v4l-2-2V10H9v2z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>女儿</small><strong>王雨墨</strong></div></div></div><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>儿子</small><strong>王志鹏</strong></div></div></div></div></div><div class="branch"><div class="parent"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="女"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 14V10a5 5 0 0 1 10 0v4l-2-2V10H9v2z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>第五个孩子、唯一的女儿</small><strong>王丽琴</strong></div></div></div><div class="children"><div class="child"><div class="person"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="avatar" role="img" aria-label="男"><circle cx="12" cy="12" r="11" fill="#eee5d8" /><g fill="#826a50"><path d="M7 10a5 5 0 0 1 10 0l-3-2-7 3z" /><circle cx="12" cy="10" r="3" /><path d="M5 21v-2a7 5 0 0 1 14 0v2z" /></g></svg><div><small>儿子</small><strong>付博</strong></div></div></div></div></div></div></div>
+
+<p>家庭关系简图。除标明长子、次子的地方外，下一代的排列不表示长幼。</p>
+<h2 id="chapter-2-story-1">谁在讲述</h2>
+<p>书里的“我”是付博，家人的称呼也从我这里说起。王丽琴是我的妈妈，是姥姥的第五个孩子，也是唯一的女儿。四位舅舅按排行，分别是大舅王根喜、二舅王光荣、三舅王光明、四舅王宾。</p>
+<p>讲到其他家人的回忆，会先说明他与姥姥的关系，再写名字。引号里保留他们自己的话；妈妈说的“我”，就是妈妈，她说的“母亲”，就是姥姥。</p></section><section id="chapter-3"><h1>目录</h1>
+<p><a href="#chapter-4">一、小时候的家</a></p>
+<p><a href="#chapter-5">二、青年时代与成家</a></p>
+<p><a href="#chapter-6">三、养育孩子的那些年</a></p>
+<p><a href="#chapter-7">四、子女长大，日子变化</a></p>
+<p><a href="#chapter-8">五、晚辈记得的暑假</a></p>
+<p><a href="#chapter-9">六、后来的日子</a></p>
+<p><a href="#chapter-10">七、今天</a></p>
+<p><a href="#chapter-11">卷末、照片与视频</a></p></section><section id="chapter-4"><h1>一、小时候的家</h1></section><section id="chapter-5"><h1>二、青年时代与成家</h1></section><section id="chapter-6"><h1>三、养育孩子的那些年</h1>
+<p><em>姥姥的女儿——王丽琴的回忆</em></p>
+<p>王丽琴小时候，饿了就去找母亲。</p>
+<p>那时候还没包产到户，人们在队里干活，挣工分。家里五个孩子，四个儿子，一个女儿，王丽琴最小。母亲和一位她叫“婶子”的人一起喂猪，父亲在队里当队长。</p>
+<p>父亲这个队长，一当就是很多年。从王丽琴开始记事，一直当到她结婚。</p>
+<p>王丽琴记得那时的地洞炉子，记得烧玉米、烧糖菜。讲起这些吃食，她说：“那会儿每家每户的小孩都吃不了大饱。”</p>
+<p>乡里有人来，母亲还要给来人做饭。这时候，王丽琴也留在那里，等着吃饭。</p>
+<p>“我就在那儿不走，吃了饭再走。”</p></section><section id="chapter-7"><h1>四、子女长大，日子变化</h1>
+<h2 id="chapter-7-story-0">日子慢慢好了</h2>
+<p><em>姥姥的女儿——王丽琴的回忆</em></p>
+<p>小时候去找母亲，王丽琴惦记的是吃饭。讲到后来的日子，她记得家里有了肉，也有了酒。包产到户以后，四个哥哥都是壮劳力，家里的生活跟着有了起色。</p>
+<p>她说：“一天比一天生活好了。”</p></section><section id="chapter-8"><h1>五、晚辈记得的暑假</h1>
+<p>妈妈讲的是她小时候的家。到了我的童年，我也常往姥姥家去。我记得最多的，是在那里过的暑假。</p>
+<h2 id="chapter-8-story-0">坐车去姥姥家</h2>
+<p><em>姥姥的外孙——付博的回忆</em></p>
+<p>印象里，那些应该都是小学时候的事。一放暑假，我就喜欢往姥姥家去。</p>
+<p>我们住在陕坝镇里。去姥姥家，要坐2路公交车，沿着省道一直坐到终点，再走大概两三公里，才能到她那个村子。</p>
+<p>我在那里有玩伴。四舅王宾家的儿子王志鹏、女儿王雨墨，跟我年纪相近，我们能玩到一起。姥姥也不像妈妈那样管我。亲戚送给她和姥爷的牛肉罐头之类的好东西，他们会拿给我吃。</p>
+<p>小时候嘴馋，有好吃的，有人一起玩，就愿意在那里住。</p>
+<h2 id="chapter-8-story-1">院子里的压水井</h2>
+<p><em>姥姥的外孙——付博的回忆</em></p>
+<p>在姥姥家，打水也是我喜欢干的事。院子里那口压水井，要先舀一瓢水倒进去引水，才能把井水压上来。我喜欢玩它，家里要打水，我就去打，打上几桶，再一桶一桶倒进水缸里。</p>
+<h2 id="chapter-8-story-2">跟姥爷放羊</h2>
+<p><em>姥姥的外孙——付博的回忆</em></p>
+<p>有时我也跟着姥爷出去放羊。他带着一根长杆，杆头有个小铲子，用来铲柳树的枝干。铲下来的枝干捆好，一捆一捆放上板车，拉回去喂羊。</p>
+<p>板车靠家里的牲畜拉。是驴还是骡子，我已经记不清了。</p>
+<h2 id="chapter-8-story-3">姥姥的油烙饼</h2>
+<p><em>姥姥的外孙——付博的回忆</em></p>
+<p>牛肉罐头之外，我还惦记姥姥烙的油烙饼。</p>
+<p>她用的灶在院子里，是砖头和泥土砌的，底下填柴，上面放一口铁锅。烙饼时，我就帮着收集麦杆和晒干的葵花杆。麦杆引火，接着烧葵花杆，火很旺。</p>
+<p>姥姥擀饼、烙饼，烙得金黄金黄的，吃着特别酥脆。我爱吃，到现在也忘不掉。</p>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-07.jpg" data-memoir-bytes="5595635" alt="付博和姥姥的合影" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-07.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>2019年10月，外孙付博和姥姥在姥姥家的合影。</figcaption></figure></section><section id="chapter-9"><h1>六、后来的日子</h1>
+<h2 id="chapter-9-story-0">过年再回去</h2>
+<p><em>姥姥的外孙——付博的回忆</em></p>
+<p>后来回姥姥家，多是在过年的时候了。去舅舅家，我喜欢领压岁钱。到了姥姥家，她也给，我却不想要。她年纪大了，地也种不动了。我领到的压岁钱，还会分一些给她。</p>
+<p>上高中以后忙，再后来去呼和浩特上大学，回姥姥家的记忆，便大多留在过年这几天。</p>
+<h2 id="chapter-9-story-1">院子和村庄变了样</h2>
+<p><em>姥姥的外孙——付博的回忆</em></p>
+<p>姥姥家的院子后来也换了样子。小时候是土院子，围墙用树枝围着。后来院子铺好了，树枝围墙换成了砖墙，家里也建了厕所。村里添了几条路，我记得是石板路。</p>
+<p>这些变化具体在哪一年，是不是一齐做完的，我已经记不清了。</p>
+<p><em>那时的陕坝</em></p>
+<p>“十个全覆盖”期间，邻近的陕坝镇也有村庄修路、改造院墙，2016年2月的地方报道里留有记录。<a href="https://inews.nmgnews.com.cn/system/2016/02/04/011877490.shtml">报道：杭锦后旗陕坝镇环境整治</a></p></section><section id="chapter-10"><h1>七、今天</h1>
+<p><em>姥姥的外孙——付博 · 2026年9月</em></p>
+<p>如今我在深圳工作，妈妈王丽琴这几天陪着姥姥。妈妈小时候去找母亲吃饭的往事，我想再听她讲讲。姥姥愿意聊的时候，也听她说说以前。</p></section><section id="chapter-11"><h1>卷末、照片与视频</h1>
+<p>这些照片里，有姥姥一个人的，也有她和儿女、晚辈们在一起的。母女同坐的那段视频，也放在这里。</p>
+<h2 id="chapter-11-story-0">姥姥的照片</h2>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-09.jpg" data-memoir-bytes="2048940" alt="姥姥门边站像" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-09.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>约2016年5月，姥姥站在门边。</figcaption></figure>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-08.jpg" data-memoir-bytes="2095357" alt="姥姥室内坐像" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-08.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>约2018年2月，姥姥在室内。</figcaption></figure>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-05.jpg" data-memoir-bytes="5162318" alt="付博和姥姥镜前合影" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-05.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>2021年6月，外孙付博和姥姥的镜前合影。</figcaption></figure>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-06.jpg" data-memoir-bytes="4678238" alt="姥姥室内站像" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-06.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>2021年6月，姥姥在家里。</figcaption></figure>
+<h2 id="chapter-11-story-1">母女同坐</h2>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-01.jpeg" data-memoir-bytes="737530" alt="王丽琴和姥姥的视频截图" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-01.jpeg" target="_blank" rel="noopener">查看原图</a></p><figcaption>2025年1月，女儿王丽琴和母亲坐在一起。截自下方家庭视频。</figcaption></figure>
+<figure><video controls="controls" playsinline="playsinline" preload="none" width="1920" height="1080" crossorigin="anonymous" src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-04.mov" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-04.mov">您的浏览器暂不支持播放视频。</video><figcaption>2025年1月，女儿王丽琴和母亲的一段家庭影像。</figcaption></figure>
+<h2 id="chapter-11-story-2">四个人的合影</h2>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-02.jpg" data-memoir-bytes="3262384" alt="付博、父母与姥姥合影" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/PH-75c8-02.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>2025年1月，外孙付博、父母和姥姥在院前的合影。</figcaption></figure>
+<h2 id="chapter-11-story-3">一张近照</h2>
+<figure><img class="memoir-photo" data-memoir-src="bibi-bookshelf/memoir/OEBPS/media/M0001.jpg" data-memoir-bytes="132065" alt="姥姥近照" /><p class="media-note"><a href="bibi-bookshelf/memoir/OEBPS/media/M0001.jpg" target="_blank" rel="noopener">查看原图</a></p><figcaption>姥姥近照。</figcaption></figure></section></main><script>/* The entire book is already visible. This optional ES5 script only enhances media. */
+(function () {
+    var photos = document.querySelectorAll('img[data-memoir-src]');
+    var started = false, active = 0, queue = [];
+    function cache() { return window.MemoirCache && window.MemoirCache.supported ? window.MemoirCache : null; }
+    function message(node, text) { node.textContent = text; }
+    function start() {
+        if (started) return;
+        started = true;
+        for (var i = 0; i < photos.length; i++) preparePhoto(photos[i]);
+        var videos = document.querySelectorAll('video[data-memoir-src]');
+        for (var j = 0; j < videos.length; j++) prepareVideo(videos[j]);
+        scan();
+        window.addEventListener('scroll', scan, {passive:true});
+        window.addEventListener('resize', scan);
+    }
+    function scan() {
+        for (var i = 0; i < photos.length; i++) {
+            var img = photos[i], r = img.parentNode.getBoundingClientRect();
+            if (!img.getAttribute('data-state') && r.top < window.innerHeight + 150 && r.bottom > -150) {
+                img.setAttribute('data-state', 'queued'); queue.push(img);
+            }
+        }
+        pump();
+    }
+    function pump() { while (active < 2 && queue.length) load(queue.shift()); }
+    function preparePhoto(img) {
+        var note = img.parentNode.querySelector('.media-note');
+        var status = document.createElement('span'); note.insertBefore(status, note.firstChild);
+        var retry = document.createElement('button'); retry.textContent = '继续加载照片'; retry.hidden = true;
+        note.appendChild(retry); img.memoirStatus = status; img.memoirRetry = retry;
+        retry.onclick = function () { if (img.getAttribute('data-state') !== 'loading') { queue.push(img); pump(); } };
+    }
+    function load(img) {
+        if (img.getAttribute('data-state') === 'loading' || img.getAttribute('data-state') === 'done') return;
+        active++; img.setAttribute('data-state','loading'); img.memoirRetry.hidden = true;
+        message(img.memoirStatus,'正在加载照片… ');
+        var api = cache(), url = img.getAttribute('data-memoir-src'), finished = false;
+        function end(ok, saved) {
+            if (finished) return; finished = true; active--;
+            img.setAttribute('data-state',ok ? 'done' : 'failed');
+            message(img.memoirStatus, ok ? (saved ? '已保存在本机 · ' : '') : '加载中断，文字可继续阅读。 ');
+            img.memoirRetry.hidden = ok; pump();
+        }
+        function display(src, saved, revoke) {
+            img.onload = function () { if(revoke) URL.revokeObjectURL(src); end(true,saved); };
+            img.onerror = function () { if(revoke) URL.revokeObjectURL(src); end(false,false); };
+            img.src = src;
+        }
+        if (!api) { display(url,false,false); return; }
+        api.download(url,function (s) {
+            message(img.memoirStatus, s.source === 'local' ? '正在读取本机照片… ' : '照片加载 '+Math.floor(s.loaded/s.total*100)+'% · ');
+        }).then(function (r) { display(URL.createObjectURL(r.blob),r.saved,true); },function () { end(false,false); });
+    }
+    function prepareVideo(video) {
+        var panel = document.createElement('div'); panel.className = 'media-note';
+        var status = document.createElement('span'); panel.appendChild(status);
+        var button = document.createElement('button'); button.textContent = '保存视频到本机'; panel.appendChild(button);
+        var link = document.createElement('a'); link.href = video.getAttribute('data-memoir-src'); link.textContent = '打开原视频'; panel.appendChild(link);
+        video.parentNode.insertBefore(panel,video.nextSibling);
+        var api = cache(), saving = false, controller, blobURL;
+        function local(blob) {
+            if (blobURL) URL.revokeObjectURL(blobURL);
+            blobURL = URL.createObjectURL(blob); video.src = blobURL; video.load();
+        }
+        button.hidden = !api;
+        video.addEventListener('error',function () { message(status,'暂不能播放，可试试打开原视频。 '); });
+        if (!api) return;
+        api.status(link.href).then(function (s) {
+            if (s.complete && !saving) api.download(link.href,function () {}).then(function (r) {
+                if(video.paused && !saving) local(r.blob);
+                message(status,'已保存在本机 · '); button.hidden = true;
+            },function () {});
+            else if (s.saved) message(status,'已有保存进度，可继续。 ');
+        },function () {});
+        button.onclick = function () {
+            if (saving) { controller.abort(); return; }
+            saving = true; controller = new AbortController(); button.textContent = '暂停保存';
+            api.download(link.href,function (s) { message(status,'保存 '+Math.floor(s.loaded/s.total*100)+'% · '); },controller.signal).then(function (r) {
+                saving = false; message(status,r.saved ? '已保存在本机 · ' : '本机未能保存，本次可播放。 ');
+                button.hidden = true; if(video.paused) local(r.blob);
+            },function (e) {
+                saving = false; message(status,e.name==='AbortError' ? '已暂停。 ' : '下载中断。 '); button.textContent = '继续保存视频';
+            });
+        };
+    }
+    // Even a blocked cache bundle must not hold up text or the native media fallback.
+    var script = document.createElement('script'); script.src = 'bibi/memoir-cache.js?v=wechat2'; script.async = true;
+    script.onload = start; script.onerror = start; document.body.appendChild(script);
+    setTimeout(start, 5000);
+})();
+</script></body></html>

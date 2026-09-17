@@ -188,6 +188,7 @@ Bibi.x({id: 'MemoirLoading', description: 'Visible photo loading and truthful pr
     });
     E.bind('bibi:opened', () => {
         opened = true; window.memoirOpened = true; notice.remove();
+        window.dispatchEvent(new Event('memoir-opened'));
         pump();
     });
     E.bind('bibi:scrolled', pump);
