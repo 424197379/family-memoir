@@ -2,6 +2,8 @@
 
 ## Cloudflare 自动部署
 
+2026-09-17自动更新：对外固定分享 `https://grandma-memoir.pages.dev/`，不再要求更换测试链接或点击更新。页面导航先向服务器重新验证，失败或6秒无响应时使用本版本已保存的网页；阅读中不刷新已识别的新版页面。Service Worker安装完成自动激活，未实现更新握手的历史页面会自动重开一次以迁移旧缓存。缓存客户端文件名带内容哈希，避免新正文搭配旧脚本。仅预存入口、合并阅读页及对应缓存客户端，媒体继续使用原有SHA256分片库；升级不清除媒体。无Service Worker的浏览器依靠HTTP重新验证。用户要求后续不自动发送飞书，除非再次明确提出。
+
 2026-09-17：按用户要求新增 Cloudflare Pages GitHub 联动配置，项目名 `grandma-memoir`，部署成功后使用其 `pages.dev` 免费网址。网站默认打开 Bibi 翻页阅读。下方正文直出为 GitHub 旧站历史行为，不能当作 Cloudflare 默认体验。
 
 - 连接本仓库 `main`，框架选择 None，构建命令 `npm run build:cloudflare`，输出目录 `cloudflare-dist`，Node.js 22。

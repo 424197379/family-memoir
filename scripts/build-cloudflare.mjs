@@ -58,8 +58,10 @@ const plugin = manifest => ({name:'cloudflare-catalog',setup(builder) {
     builder.onLoad({filter:/cache-manifest\.json$/,namespace:'generated-catalog'},()=>({contents:JSON.stringify(manifest),loader:'json'}));
 }});
 await build({absWorkingDir:here,entryPoints:['scripts/cache/client.js'],bundle:true,minify:true,outfile:path.join(output,'bibi/memoir-cache.js'),format:'iife',target:['es2017'],plugins:[plugin({})]});
-const packed = await packReader(output);
-await writeFile(path.join(output,'_headers'), '/sw.js\n  Cache-Control: no-cache\n/*.html\n  Cache-Control: no-cache\n/bibi/\n  Cache-Control: no-cache\n');
+const cacheScript = 'memoir-cache.' + hash(await readFile(path.join(output,'bibi/memoir-cache.js'))).slice(0,16) + '.js';
+await cp(path.join(output,'bibi/memoir-cache.js'),path.join(output,'bibi',cacheScript));
+const packed = await packReader(output, cacheScript);
+await writeFile(path.join(output,'_headers'), '/\n  Cache-Control: no-cache\n/sw.js\n  Cache-Control: no-cache\n/*.html\n  Cache-Control: no-cache\n/bibi/\n  Cache-Control: no-cache\n/bibi/memoir-cache.js\n  Cache-Control: no-cache\n');
 const shell = [], files = [];
 async function walk(dir='') {
     for (const entry of await readdir(path.join(output,dir),{withFileTypes:true})) {
@@ -69,7 +71,9 @@ async function walk(dir='') {
         if (size>25*1024*1024) throw Error('Pages 25 MiB limit: '+relative);
         if (/\.(zip|epub|mov|mp4)$/i.test(relative)) throw Error('Unexpected large archive or video: '+relative);
         files.push({path:relative,bytes:size});
-        if (!relative.includes('/media/') && relative!=='sw.js' && /\.(html|xhtml|js|css|woff2?|ttf|opf|xml)$/.test(relative)) shell.push({url:relative,revision:hash(await readFile(path.join(output,relative)))});
+        // The reader HTML already embeds the core, chapters, font and styles.
+        // Do not make an upgrade wait for dozens of redundant resources.
+        if (['index.html','bibi/index.html','bibi/'+cacheScript].includes(relative)) shell.push({url:relative,revision:hash(await readFile(path.join(output,relative)))});
     }
 }
 await walk();

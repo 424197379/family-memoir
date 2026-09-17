@@ -6,7 +6,7 @@ import {transform} from 'esbuild';
 
 const json = value => JSON.stringify(value).replace(/</g, '\\u003c');
 const script = code => code.replace(/<\/script/gi, '<\\/script');
-export async function packReader(output) {
+export async function packReader(output, cacheScript = 'memoir-cache.js') {
     const read = relative => readFile(path.join(output, relative), 'utf8');
     const book = 'bibi-bookshelf/memoir/';
     const documents = {};
@@ -68,6 +68,7 @@ export async function packReader(output) {
       };
     }());`;
     const diagnostics = `
+    if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message',function(event){if(event.data && event.data.type==='MEMOIR_READER_PROBE' && event.ports[0])event.ports[0].postMessage({type:'MEMOIR_READER_READY'});});
     window.memoirStage = function(message) { var panel=document.getElementById('memoir-loading'); if(panel&&!window.memoirStartupFailed) panel.querySelector('p').textContent=message; };
     window.memoirFail = function(message) { if(window.memoirOpened)return; window.memoirStartupFailed=true; window.memoirStartupError=message; var panel=document.getElementById('memoir-loading'); if(panel){panel.querySelector('p').textContent='暂时未能打开回忆录';panel.querySelector('small').textContent=message;} };
     document.addEventListener('DOMContentLoaded',function(){if(window.memoirStartupError)window.memoirFail(window.memoirStartupError);});
@@ -90,7 +91,7 @@ export async function packReader(output) {
     html = html.replace(/<script id="bibi-script"[^>]*><\/script>/,()=>'<script>'+script(diagnostics+polyfills)+'</script><script>'+insertCore+'</script><script>'+script(adapter)+'</script>');
     html = html.replace(/<script id="bibi-preset"[^>]*><\/script>/,()=>'<script id="bibi-preset" data-memoir-src="presets/default.js" data-bibi-bookshelf="">'+script(preset)+'</script>');
     // Optional cache code cannot block layout or first-page rendering.
-    html = html.replace('</body>', '<script src="memoir-cache.js?v=single-response-1" async></script></body>');
+    html = html.replace('</body>', '<script src="'+cacheScript+'" async></script></body>');
     html = html.replace('正在连接，准备正文…','正在打开翻页回忆录…').replace('inset:0;', 'top:0;right:0;bottom:0;left:0;');
     assert(!/<script[^>]+\ssrc="(?:resources|presets)/.test(html));
     await writeFile(path.join(output,'bibi/index.html'),html);

@@ -58,21 +58,10 @@ window.dispatchEvent(new Event('memoir-cache-ready'));
 if (useWorker && 'serviceWorker' in navigator) {
     const register = () => {
     navigator.serviceWorker.register(new URL('sw.js', root), {scope: root.pathname, updateViaCache: 'none'}).then(registration => {
-        const showUpdate = () => {
-            if (!registration.waiting) { document.getElementById('memoir-update')?.remove(); return; }
-            // First installation activates itself; only an upgrade needs this action.
-            if (!registration.active || !navigator.serviceWorker.controller || document.getElementById('memoir-update')) return;
-            const button = document.createElement('button'); button.id = 'memoir-update';
-            button.textContent = '有新版，点击更新';
-            button.style.cssText = 'position:fixed;bottom:38px;right:12px;z-index:99999;padding:10px;background:#fff8eb;border:1px solid #85633f;border-radius:6px';
-            button.onclick = () => {
-                navigator.serviceWorker.addEventListener('controllerchange', () => location.reload(), {once: true});
-                registration.waiting?.postMessage({type: 'SKIP_WAITING'});
-            };
-            document.body.appendChild(button);
-        };
-        showUpdate();
-        registration.addEventListener('updatefound', () => registration.installing?.addEventListener('statechange', showUpdate));
+        document.getElementById('memoir-update')?.remove();
+        registration.waiting?.postMessage({type:'SKIP_WAITING'});
+        // Check when opening, independently of the browser's periodic SW check.
+        registration.update().catch(() => { /* Offline: keep the installed reader. */ });
     }).catch(() => { /* WeChat versions without SW still use the IndexedDB download path. */ });
     };
     // Precache fetches must never compete with the flip reader's first chapter load.
