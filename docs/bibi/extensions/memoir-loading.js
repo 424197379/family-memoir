@@ -147,17 +147,22 @@ Bibi.x({id: 'MemoirLoading', description: 'Visible photo loading and truthful pr
         // If SW controls the page, playback and the background save share verified chunks.
         // Without SW, WeChat uses explicit save to avoid downloading twice while streaming.
         video.addEventListener('play', () => { if (navigator.serviceWorker?.controller && !button.hidden) save(false); });
-        if (window.MemoirCache?.supported) {
-            MemoirCache.status(url).then(async state => {
-                if (state.complete) {
-                    const result = await MemoirCache.download(url, () => {});
-                    if (video.paused) useBlob(result.blob);
-                    label.textContent = '已保存在本机，可直接播放'; button.hidden = true;
-                } else if (state.saved) {
-                    label.textContent = '已保存 ' + size(state.saved) + '，可接着下载'; button.textContent = '继续保存视频';
-                }
-            }).catch(() => { label.textContent = '本机暂不能保存，可在线播放'; });
-        } else { button.hidden = true; label.textContent = '此浏览器暂不能保存，可在线播放'; }
+        function cacheReady() {
+            if (window.MemoirCache?.supported) {
+                button.hidden = false; label.textContent = '首次可在线播放，也可先保存到本机。';
+                MemoirCache.status(url).then(async state => {
+                    if (state.complete) {
+                        const result = await MemoirCache.download(url, () => {});
+                        if (video.paused) useBlob(result.blob);
+                        label.textContent = '已保存在本机，可直接播放'; button.hidden = true;
+                    } else if (state.saved) {
+                        label.textContent = '已保存 ' + size(state.saved) + '，可接着下载'; button.textContent = '继续保存视频';
+                    }
+                }).catch(() => { label.textContent = '本机暂不能保存，可在线播放'; });
+            } else { button.hidden = true; label.textContent = '此浏览器暂不能保存，可在线播放'; }
+        }
+        cacheReady();
+        if (!window.MemoirCache) window.addEventListener('memoir-cache-ready', cacheReady, {once:true});
     }
 
     E.bind('bibi:postprocessed-item', item => {

@@ -52,6 +52,7 @@ function versioned(url) {
     const result = new URL(url, location.href); result.searchParams.set('v', itemFor(url).sha256); return result.href;
 }
 window.MemoirCache = {supported, status, download, versioned};
+window.dispatchEvent(new Event('memoir-cache-ready'));
 
 // Optional enhancement: media persistence above does not depend on service workers.
 if (useWorker && 'serviceWorker' in navigator) {

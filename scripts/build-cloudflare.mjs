@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {build} from 'esbuild';
 import assert from 'node:assert/strict';
+import {packReader} from './pack-reader.mjs';
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = path.join(here, 'docs');
 const output = path.join(here, 'cloudflare-dist');
@@ -56,7 +57,8 @@ const plugin = manifest => ({name:'cloudflare-catalog',setup(builder) {
     builder.onLoad({filter:/cache-media\.json$/,namespace:'generated-catalog'},()=>({contents:JSON.stringify(media),loader:'json'}));
     builder.onLoad({filter:/cache-manifest\.json$/,namespace:'generated-catalog'},()=>({contents:JSON.stringify(manifest),loader:'json'}));
 }});
-await build({absWorkingDir:here,entryPoints:['scripts/cache/client.js'],bundle:true,minify:true,outfile:path.join(output,'bibi/memoir-cache.js'),format:'iife',target:['es2020'],plugins:[plugin({})]});
+await build({absWorkingDir:here,entryPoints:['scripts/cache/client.js'],bundle:true,minify:true,outfile:path.join(output,'bibi/memoir-cache.js'),format:'iife',target:['es2017'],plugins:[plugin({})]});
+const packed = await packReader(output);
 await writeFile(path.join(output,'_headers'), '/sw.js\n  Cache-Control: no-cache\n/*.html\n  Cache-Control: no-cache\n/bibi/\n  Cache-Control: no-cache\n');
 const shell = [], files = [];
 async function walk(dir='') {
@@ -88,4 +90,4 @@ for (const item of media.filter(item=>!item.url.startsWith(github))) {
 assert(!html.includes('../read.html'), 'Flip reader must not redirect to scrolling text');
 assert(files.length<=20000, 'Pages file count exceeded');
 // Build metadata is not included in the public site.
-console.log(JSON.stringify({output,files:files.length,bytes:files.reduce((n,f)=>n+f.bytes,0),externalVideos:media.filter(m=>m.url.startsWith('https:')).map(m=>m.url)},null,2));
+console.log(JSON.stringify({output,...packed,files:files.length,bytes:files.reduce((n,f)=>n+f.bytes,0),externalVideos:media.filter(m=>m.url.startsWith('https:')).map(m=>m.url)},null,2));
