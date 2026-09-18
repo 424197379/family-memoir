@@ -3,6 +3,7 @@ import {readFile, writeFile, readdir} from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {transform} from 'esbuild';
+import {installStartupDiagnostics, traceReaderStartup} from './reader-startup.js';
 
 const json = value => JSON.stringify(value).replace(/</g, '\\u003c');
 const script = code => code.replace(/<\/script/gi, '<\\/script');
@@ -60,21 +61,8 @@ export async function packReader(output, cacheScript = 'memoir-cache.js') {
           if (!registered) { window.memoirFail('阅读器组件未能启动：'+name); reject(new Error('Extension did not register: '+name)); }
         });
       };
-      var initialize = Bibi.initialize;
-      Bibi.initialize = function() {
-        var result = initialize.apply(this,arguments);
-        E.bind('bibi:x_x',function(error) { window.memoirFail('阅读器启动失败：'+String(error)); });
-        return result;
-      };
-    }());`;
-    const diagnostics = `
-    if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message',function(event){if(event.data && event.data.type==='MEMOIR_READER_PROBE' && event.ports[0])event.ports[0].postMessage({type:'MEMOIR_READER_READY'});});
-    window.memoirStage = function(message) { var panel=document.getElementById('memoir-loading'); if(panel&&!window.memoirStartupFailed) panel.querySelector('p').textContent=message; };
-    window.memoirFail = function(message) { if(window.memoirOpened)return; window.memoirStartupFailed=true; window.memoirStartupError=message; var panel=document.getElementById('memoir-loading'); if(panel){panel.querySelector('p').textContent='暂时未能打开回忆录';panel.querySelector('small').textContent=message;} };
-    document.addEventListener('DOMContentLoaded',function(){if(window.memoirStartupError)window.memoirFail(window.memoirStartupError);});
-    window.addEventListener('error',function(event) { if(event.message) window.memoirFail(event.message); });
-    window.addEventListener('unhandledrejection',function(event) { window.memoirFail(String(event.reason)); });
-    window.setTimeout(function(){ if(!window.memoirOpened&&!window.memoirStartupFailed) window.memoirFail('翻页阅读器启动超时，请重新打开。版本：single-response-1'); },30000);`;
+    }()); (${traceReaderStartup.toString()})();`;
+    const diagnostics = `(${installStartupDiagnostics.toString()})();`;
     let html = await read('bibi/index.html');
     html = html.replace(/<script>\s*window\.setTimeout[\s\S]*?<\/script>/,'');
     for (const [id,relative] of [['bibi-style','resources/styles/bibi.css'],['bibi-dress','wardrobe/everyday/bibi.dress.css']]) {
