@@ -6,3 +6,5 @@ __pycache__/
 node_modules/
 cloudflare-dist/
 github-dist/
+# 仅供本机压缩的原件暂存区；实际家庭原件保存在仓库外的资料库。
+docs/bibi-bookshelf/memoir/OEBPS/media/

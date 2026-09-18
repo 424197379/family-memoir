@@ -21,12 +21,14 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Check video sizes
-        run: python3 scripts/check_video_sizes.py docs
+        run: python3 scripts/check_video_sizes.py web-media
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Reject originals and verify prepared media
+        run: node scripts/check-publish-media.mjs --ref HEAD
       - name: Build flip-book
         run: npm run build:github
       - uses: actions/configure-pages@v5

@@ -7,7 +7,7 @@ import path from 'node:path';
 import {build} from 'esbuild';
 import assert from 'node:assert/strict';
 import {packReader} from './pack-reader.mjs';
-import {prepareMedia} from './prepare-media.mjs';
+import {readPreparedMedia} from './check-publish-media.mjs';
 import {rewriteMediaLinks} from './media-links.mjs';
 const here = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = path.join(here, 'docs');
@@ -17,17 +17,19 @@ const cloudflare = target === 'cloudflare';
 const output = path.join(here, target+'-dist');
 const hash = data => createHash('sha256').update(data).digest('hex');
 const github = 'https://424197379.github.io/family-memoir/';
-const prepared = await prepareMedia();
+const prepared = await readPreparedMedia();
 // This directory is disposable generated output, never a source or original.
 await rm(output, {recursive:true, force:true});
 await mkdir(output);
-await cp(source, output, {recursive:true});
+const originalsDir = path.join(source,'bibi-bookshelf/memoir/OEBPS/media');
+// 即使本地暂存了原件，也不将其复制到任一托管产物。
+await cp(source, output, {recursive:true,filter:entry=>entry!==originalsDir});
+await mkdir(path.join(output,'bibi-bookshelf/memoir/OEBPS/media'),{recursive:true});
 const media = [];
 const replacements = [];
 for (const item of prepared.items) {
     const relative = 'bibi-bookshelf/memoir/OEBPS/media/' + item.file;
     const originalRelative = 'bibi-bookshelf/memoir/OEBPS/media/' + item.source;
-    assert.equal(hash(await readFile(path.join(source,originalRelative))),item.sourceSha256,'Original changed during build');
     const data = await readFile(path.join(here,'web-media',item.file));
     assert.equal(hash(data),item.sha256,'Derivative checksum mismatch');
     const video = item.type.startsWith('video/');
@@ -37,16 +39,19 @@ for (const item of prepared.items) {
     const types = {'.mov':'video/quicktime','.mp4':'video/mp4','.jpg':'image/jpeg','.jpeg':'image/jpeg','.png':'image/png','.webp':'image/webp'};
     media.push({url:video && cloudflare ? github+relative : relative, sha256:item.sha256, bytes:data.length, chunks, type:item.type});
     replacements.push({...item,originalUrl:'media/'+item.source,url:video && cloudflare?github+relative:'media/'+item.file,sourceType:types[path.extname(item.source).toLowerCase()]});
-    // Originals remain at their existing GitHub URLs for old cached readers.
-    // New readers request only derivatives; Cloudflare never hosts the originals.
-    if (cloudflare) await rm(path.join(output,originalRelative));
+    // 旧链接继续可用，但返回压缩副本；兼容别名仅在构建产物中生成，不重复提交媒体。
+    if (!cloudflare) await cp(path.join(here,'web-media',item.file),path.join(output,originalRelative));
     if (!video || !cloudflare) await cp(path.join(here,'web-media',item.file),path.join(output,relative));
 }
 const bookDir = path.join(output,'bibi-bookshelf/memoir/OEBPS');
 for (const name of await readdir(bookDir)) {
     if (!/\.(xhtml|opf)$/.test(name)) continue;
     const file = path.join(bookDir,name);
-    await writeFile(file,rewriteMediaLinks(await readFile(file,'utf8'),replacements));
+    const markup = await readFile(file,'utf8');
+    for (const match of markup.matchAll(/(?:href|src|data-memoir-src)="media\/([^"/]+)"/g)) {
+        assert(prepared.items.some(item=>item.source===match[1]), 'Media not prepared locally: '+match[1]);
+    }
+    await writeFile(file,rewriteMediaLinks(markup,replacements));
 }
 // Both hosts and the historical scrolling URL open the same flip-book.
 const redirect = '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>姥姥的回忆录</title><meta http-equiv="refresh" content="0;url=./bibi/"><a href="./bibi/">打开回忆录</a></html>';

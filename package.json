@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "media:prepare": "node scripts/prepare-media.mjs",
+    "media:prepare": "node scripts/prepare-publication-media.mjs",
+    "media:check": "node scripts/check-publish-media.mjs",
+    "publish:check": "node scripts/check-publish-media.mjs --index",
+    "publish:push": "node scripts/push-publication.mjs",
     "build:github": "node --test tests/*.test.mjs && node scripts/build-cloudflare.mjs github",
     "build:cloudflare": "node --test tests/*.test.mjs && node scripts/build-cloudflare.mjs",
     "test": "node --test tests/*.test.mjs"

@@ -20,8 +20,9 @@
 | Cloudflare Pages | `npm run build:cloudflare` | `cloudflare-dist` | GitHub上的同一份压缩MP4 |
 
 - Node.js 22，先运行 `npm ci`。GitHub Actions 与 Cloudflare GitHub 集成都监听 `main`；推送获准成品后自动构建部署。Cloudflare 项目名 `grandma-memoir`，框架 None。
-- 两个构建均执行21项压缩/缓存/导航测试，自动准备媒体并校验原件、衍生文件及章节正文；只改媒体属性，不改正文和图注。
-- 上传前运行 `python3 scripts/check_video_sizes.py docs`。每个视频上限50 MiB（52,428,800字节），超过即中止；GitHub Actions和构建也检查。Cloudflare输出另受单文件25 MiB限制，因此视频不打入Cloudflare产物。
+- 两个构建均执行25项压缩/发布边界/缓存/导航测试，只校验已经在本地生成的压缩副本与章节正文；云端不压缩、不需要原件，缺少或损坏的压缩文件直接报错。
+- 上传前运行 `npm run publish:check` 检查实际Git暂存快照；推送使用 `npm run publish:push`，它核验每个待上传提交，拒绝包含原件、未列入清单或哈希不符的媒体，保留现有Git hooks。直接使用普通git push会绕过此额外本地门禁，应沿用统一推送命令。
+- 每个压缩视频上限50 MiB（52,428,800字节），超过即中止；GitHub Actions检查 `web-media/` 和提交快照，构建也检查。Cloudflare输出另受单文件25 MiB限制，因此视频不打入Cloudflare产物。
 - 新视频需要等GitHub Pages部署成功；两个平台完成时间可能不同。
 - 本地预览GitHub：`python3 -m http.server 8886 --bind 127.0.0.1 --directory github-dist`；Cloudflare替换为 `cloudflare-dist`。排查GitHub子路径问题时另以 `/family-memoir/` 前缀预览。
 - 更新获准正文/媒体时，先由本地书稿构建生成输入，再执行这里的托管构建。`docs/`内的旧缓存bundle会被托管构建覆盖；维护缓存请修改 `scripts/cache/`，维护合并首屏请修改 `scripts/pack-reader.mjs`。
@@ -34,9 +35,10 @@
 - 普通照片最长边2048像素；2400万像素及以上大图最长边3200，照顾大型合照细节。保持比例、不裁剪、不放大，自动按EXIF转正并转sRGB；JPEG质量86、4:4:4。透明图片用PNG保留透明度；已小且兼容的图片若重编码变大则保留原字节。动画/未支持格式明确报错，不静默丢帧。
 - 视频转H.264/AAC MP4、8位yuv420p，最长边1920/短边1080以内，不放大，最高30fps，CRF23/medium、音频128kbps。HLG/PQ自动先转线性光、Hable映射到SDR/BT.709，避免直接丢HDR标记导致错误显示。兼容且已高效的H.264素材若重编码变大，则使用无损重封装。MP4索引前置，允许边下载边播放；检查时长、视频编码、原有音轨和50MiB门禁。
 - 原件只读。文件SHA256、处理参数、脚本和工具版本共同决定是否重新生成；重复构建复用通过哈希校验的成品，损坏/缺失会重建，始终从原件处理。衍生文件名含内容哈希，浏览器不会把旧原图分片和压缩版混用。
-- `npm run media:prepare` 可单独生成；两个托管构建也会自动调用。`web-media/manifest.json`记录输入/输出哈希、尺寸和体积，`web-media/`中的当前派生文件一起提交，保证两站复用相同视频字节、不重复转码。输出目录只复制清单引用的派生文件，清单本身不发布到网站。
-- 日常流程：更新获准的 `docs/` → `npm run media:prepare` → 本地构建/查看 → 提交 `docs/` 与 `web-media/` 当前清单及所引用文件 → 推送。仅新增到本地资料库不自动发布。若忘记预生成，云端构建仍会处理；发布跨站视频后须验证GitHub地址及哈希一致。
-- GitHub暂保留已有原媒体URL兼容旧缓存/旧链接，新版阅读器只请求压缩版；它们不进入新版预下载和媒体清单。Cloudflare只上传压缩照片，视频外链GitHub。仓库/部署包总大小不等于读者打开网页要下载的大小。
+- 压缩必须在提交前运行 `npm run media:prepare`，该命令自动清理旧清单中被替换的派生缓存。两个托管构建只读压缩清单，不调用压缩器。`web-media/manifest.json`记录输入/输出哈希、尺寸和体积；仓库只提交当前清单与其引用的压缩文件，两站复用同一份视频字节。
+- 日常流程：更新获准的 `docs/`，原始媒体仅放在被Git忽略的 `docs/bibi-bookshelf/memoir/OEBPS/media/` 本机暂存区 → `npm run media:prepare` → 本地构建/查看 → 暂存获准正文、代码和 `web-media/` → `npm run publish:check` → 提交 → `npm run publish:push`。原件真源在仓库外的本地资料库；全新克隆没有原件，需要在本地从获准素材恢复暂存区才能新增或重新压缩。仅新增到本地资料库不自动发布。
+- GitHub现有原媒体文件已退出当前Git跟踪；旧媒体URL仅在部署时生成别名，内容同样为压缩版，不再提供大原件。新版阅读器只请求哈希文件名；兼容别名不进入新版预下载清单，也不重复提交到Git。Cloudflare只部署压缩照片，视频外链GitHub。
+- 当前版本家庭媒体从“69.16 MiB原件＋14.94 MiB压缩版”变为仅14.94 MiB压缩版。已经上传过的原件仍在旧Git历史中；本次不重写历史，完整历史克隆不会因此立即变小，新提交和当前发布包不再携带原件。
 - 有损压缩不能承诺与原件逐像素一致；极限放大、打印请使用资料库原件。HDR转SDR也会改变可显示动态范围。本轮检查代表性照片和视频取帧，不能替代所有设备上的色彩和播放验收。
 
 技术参考：[Sharp尺寸处理](https://sharp.pixelplumbing.com/api-resize/)、[FFmpeg滤镜](https://ffmpeg.org/ffmpeg-filters.html#tonemap)。
