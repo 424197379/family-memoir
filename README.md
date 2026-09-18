@@ -6,9 +6,10 @@
 
 - GitHub Pages：https://424197379.github.io/family-memoir/
 - Cloudflare Pages：https://grandma-memoir.pages.dev/
+- 正式分享域名（EdgeOne）：https://lifememoir.cloud/
 - 两站默认均打开 Bibi 翻页版，保留目录、照片、音视频能力。根网址和历史 `read.html` 链接统一进入 `bibi/`，不再默认显示纵向纯文字版。
 - 分享使用固定网址；后续不自动发送飞书，除非用户再次明确要求。
-- 当前授权正文源稿 SHA256：`8b41fe54039bab834b56bca4f6fc8e4995effbee34710d5f69957c57cb1a6933`。后续素材和修订不自动发布，完整资料库、原始采集、编辑说明、本机构建记录和凭据不进入仓库。
+- 2026-09-18用户授权重新发布完整新稿，当前授权正文源稿 SHA256：`506509d66f39a81e236493ae9ef4529107d55b7a7a2821f228814fa47ee1731f`。媒体仍为既有9图1视频，白名单 SHA256：`fe20a6279d24aabcf1979ca5f86ffe5cec610bb0586d66fa882b3fb60d5be2e7`。新采访视频、音轨、转写全文不在本次发布范围。后续素材和修订不自动发布，完整资料库、原始采集、编辑说明、本机构建记录和凭据不进入仓库。
 
 ## 共用构建
 
@@ -18,9 +19,10 @@
 | --- | --- | --- | --- |
 | GitHub Pages | `npm run build:github` | `github-dist` | 本站压缩MP4 |
 | Cloudflare Pages | `npm run build:cloudflare` | `cloudflare-dist` | GitHub上的同一份压缩MP4 |
+| EdgeOne Makers | `npm run build:cloudflare` | `cloudflare-dist` | GitHub上的同一份压缩MP4 |
 
 - Node.js 22，先运行 `npm ci`。GitHub Actions 与 Cloudflare GitHub 集成都监听 `main`；推送获准成品后自动构建部署。Cloudflare 项目名 `grandma-memoir`，框架 None。
-- 两个构建均执行25项压缩/发布边界/缓存/导航测试，只校验已经在本地生成的压缩副本与章节正文；云端不压缩、不需要原件，缺少或损坏的压缩文件直接报错。
+- 两个构建均执行28项压缩/发布边界/缓存/导航及启动诊断测试，只校验已经在本地生成的压缩副本与章节正文；云端不压缩、不需要原件，缺少或损坏的压缩文件直接报错。
 - 上传前运行 `npm run publish:check` 检查实际Git暂存快照；推送使用 `npm run publish:push`，它核验每个待上传提交，拒绝包含原件、未列入清单或哈希不符的媒体，保留现有Git hooks。直接使用普通git push会绕过此额外本地门禁，应沿用统一推送命令。
 - 每个压缩视频上限50 MiB（52,428,800字节），超过即中止；GitHub Actions检查 `web-media/` 和提交快照，构建也检查。Cloudflare输出另受单文件25 MiB限制，因此视频不打入Cloudflare产物。
 - 新视频需要等GitHub Pages部署成功；两个平台完成时间可能不同。
@@ -46,6 +48,7 @@
 ## 首屏、媒体与自动更新
 
 - Bibi核心、配置、扩展、兼容补丁、15份书籍结构/章节文件、正文样式与思源宋体子集合并到首个阅读HTML。图片、视频及可选缓存脚本不阻塞首屏；出错或超时显示明确提示。
+- 保留 `startup-3` 微信兼容修复：微信用同源空白页写入章节，默认章节样式内联；用户已确认该版本微信首屏可打开。此项不代替后续新内容及全部媒体的真机验收。
 - 照片按阅读位置请求，显示下载进度，失败或30秒无数据时可重试。视频 `preload="none"`，点击播放才加载；不预先下载全书媒体。
 - idb-keyval 6.3.0将SHA256校验后的256 KiB分片保存到IndexedDB，提供中断续传及视频保存/暂停/继续。文件内容不变时复用缓存。服务器若忽略Range而返回全文件，只能完整接收校验，不能保证按字节续传。跨站视频保存不借同源SW分支虚报成功。
 - 旧SW尚未更新、不认识新媒体URL时，客户端直接校验并保存已下载响应，不额外下载一遍；媒体完整缓存后直接读取本地，损坏响应不能标记为保存完成。
