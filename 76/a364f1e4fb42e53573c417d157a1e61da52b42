@@ -1,0 +1,25 @@
+scripts/reader-startup.js
+  s_b1d7ce37ee8ae8::t_9b191431701e67 1-38,41-55
+  s_b1d7ce37ee8ae8::t_a0f5dfa363ce9b 39-40
+scripts/pack-reader.mjs
+  s_b1d7ce37ee8ae8::t_9b191431701e67 6,64-65
+tests/reader-startup.test.mjs
+  s_b1d7ce37ee8ae8::t_a0f5dfa363ce9b 47,51
+  s_b1d7ce37ee8ae8::t_1ac28cbba57739 1-46,48-50,52-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "76a364f1e4fb42e53573c417d157a1e61da52b42",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
