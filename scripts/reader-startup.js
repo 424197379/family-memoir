@@ -1,6 +1,6 @@
 // 内联到 HTML 最前面：不依赖额外请求，也不向外发送诊断信息。
 export function installStartupDiagnostics() {
-    var state = {version: 'startup-3', phase: '接收页面', chapters: 0, slow: false};
+    var state = {version: 'startup-4', phase: '接收页面', chapters: 0, slow: false};
     window.memoirStartupState = state;
     function render() {
         var panel = document.getElementById('memoir-loading');

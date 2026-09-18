@@ -6,9 +6,10 @@ export function patchBibiChapters(core) {
         assert.equal(core.split(before).length - 1, 1, 'Bibi chapter patch changed: ' + before);
         core = core.replace(before, () => after);
     }
-    // 微信使用 Bibi 为嵌入式浏览器保留的同源空白页写入路径，避免 blob 页面导航。
+    // 本站正文已内置且禁止书内脚本，统一复用 Bibi 的同源空白页写入路径。
+    // 不按 UA 区分微信/夸克：同样的 blob 章节导航问题可能出现在其他内置浏览器。
     replaceOnce('U.Local||sML.UA.LINE||sML.UA.Trident||sML.UA.EdgeHTML',
-        'U.Local||/MicroMessenger/i.test(navigator.userAgent)||sML.UA.LINE||sML.UA.Trident||sML.UA.EdgeHTML');
+        'true');
     replaceOnce('Bibi.BookStyleURL=O.createBlobURL("Text",e,"text/css")',
         'Bibi.BookStyleText=e,Bibi.BookStyleURL=O.createBlobURL("Text",e,"text/css")');
     // 内置样式直接写入章节，避免再经 blob 样式 URL 以及无限 CSS 加载等待。
