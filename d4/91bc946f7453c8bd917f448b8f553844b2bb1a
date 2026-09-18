@@ -1,0 +1,23 @@
+scripts/patch-bibi-chapters.mjs
+  s_b1d7ce37ee8ae8::t_4c810a7ff6fe3f 9-10,12
+scripts/reader-startup.js
+  s_b1d7ce37ee8ae8::t_4c810a7ff6fe3f 3
+README.md
+  s_b1d7ce37ee8ae8::t_4c810a7ff6fe3f 50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d491bc946f7453c8bd917f448b8f553844b2bb1a",
+  "prompts": {},
+  "sessions": {
+    "s_b1d7ce37ee8ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a9ab-abba-7a21-84e4-3f5845534b06",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "424197379 <61532935+424197379@users.noreply.github.com>"
+    }
+  }
+}
