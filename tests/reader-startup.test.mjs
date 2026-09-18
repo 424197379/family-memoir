@@ -43,7 +43,7 @@ test('stage tracing preserves original return values, arguments and chapter prog
     const result = Promise.resolve('book');
     const Bibi = Object.fromEntries(['initialize','loadExtensions','ready','getBookData','loadBook','bindBook','openBook']
         .map(name => [name, function(argument) { assert.equal(this, Bibi); assert.equal(argument, 42); return result; }]));
-    const L = Object.fromEntries(['initializeBook','createCover','loadNavigation','preprocessResources','loadSpread'].map(name => [name, () => result]));
+    const L = Object.fromEntries(['initializeBook','createCover','loadNavigation','preprocessResources','loadSpread','postprocessItem','patchItemStyles'].map(name => [name, () => result]));
     const optimize = L.createCover.optimizeString = text => text.trim();
     Object.assign(h.context, {Bibi, L, E: {bind: (name, callback) => {events[name] = callback;}}});
     vm.runInContext(`(${traceReaderStartup.toString()})();`, h.context);

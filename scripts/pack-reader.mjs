@@ -4,6 +4,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {transform} from 'esbuild';
 import {installStartupDiagnostics, traceReaderStartup} from './reader-startup.js';
+import {patchBibiChapters} from './patch-bibi-chapters.mjs';
 
 const json = value => JSON.stringify(value).replace(/</g, '\\u003c');
 const script = code => code.replace(/<\/script/gi, '<\\/script');
@@ -28,7 +29,7 @@ export async function packReader(output, cacheScript = 'memoir-cache.js') {
         if (name === 'memoir-loading.js') code = code.replace('function localStyle(url) {', 'function localStyle(url) { if (window.MemoirBookCSS) return Promise.resolve(window.MemoirBookCSS);');
         extensions[name] = (await transform(code, {target:['es2017'],minify:true})).code;
     }
-    let core = await read('bibi/resources/scripts/bibi.js');
+    let core = patchBibiChapters(await read('bibi/resources/scripts/bibi.js'));
     let references = 0;
     core = core.replace(/\b(\w+\.Script)\.src/g, (_,element) => {
         references++;

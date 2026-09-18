@@ -1,6 +1,6 @@
 // 内联到 HTML 最前面：不依赖额外请求，也不向外发送诊断信息。
 export function installStartupDiagnostics() {
-    var state = {version: 'startup-2', phase: '接收页面', chapters: 0, slow: false};
+    var state = {version: 'startup-3', phase: '接收页面', chapters: 0, slow: false};
     window.memoirStartupState = state;
     function render() {
         var panel = document.getElementById('memoir-loading');
@@ -43,7 +43,8 @@ export function traceReaderStartup() {
      ['getBookData','读取书籍信息'],['loadBook','准备章节'],['bindBook','计算翻页排版'],['openBook','显示书页']]
         .forEach(function(step) { trace(Bibi, step[0], step[1]); });
     [['initializeBook','读取内置正文'],['createCover','准备封面'],['loadNavigation','准备目录'],
-     ['preprocessResources','准备章节样式'],['loadSpread','加载章节页面']]
+     ['preprocessResources','准备章节样式'],['loadSpread','加载章节页面'],
+     ['postprocessItem','章节页面已载入'],['patchItemStyles','应用章节样式']]
         .forEach(function(step) { trace(L, step[0], step[1]); });
     var initialize = Bibi.initialize;
     Bibi.initialize = function() {
